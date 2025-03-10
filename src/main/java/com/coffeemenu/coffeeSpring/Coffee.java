@@ -64,4 +64,6 @@ public class Coffee {
     public void setType(String type) {this.type = type;}
     public void setSize(String size) {this.size = size;}
     public void setPrice(double price) {this.price = price;}
+    public void setRoastLevel(String roastLevel) {this.roastLevel = roastLevel;}
+    public void setOrigin(String origin) {this.origin = origin;}
 }

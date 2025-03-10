@@ -38,7 +38,7 @@ public class HomeController {
     }
 
     @GetMapping("/add")
-    public String addCoffee(){
+    public String addCoffeeForm(){
         return "form";
     }
 
@@ -57,7 +57,7 @@ public class HomeController {
     public String editCoffee(@RequestParam int id, Model model) {
         for (Coffee coffee : coffeeList) {
             if (coffee.getId() == id) {
-                model.addAttribute("student", coffee);
+                model.addAttribute("coffee", coffee);
                 return "edit";
             }
         }
@@ -75,6 +75,9 @@ public class HomeController {
                 coffee.setType(type);
                 coffee.setSize(size);
                 coffee.setPrice(price);
+                coffee.setRoastLevel(roastLevel);
+                coffee.setOrigin(origin);
+
                 break;
             }
         }

@@ -7,37 +7,47 @@
             color: brown;
             font-family: sans-serif;
         }
-        table > thead > th{
+        table > thead > tr > th{
             color: red;
             font-family: sans-serif;
         }
-
-        li > a{
-            color: blue;
-            text-decoration: none;
+        table> tbody> tr > th{
+            font-family: sans-serif;
         }
+        table> tbody> tr > th > td{
+            font-family: sans-serif;
+        }
+        table> tbody> tr > th > td > a{
+            font-family: sans-serif;
+        }
+
     </style>
 </head>
 <body>
-<a href="/add">Add Coffee</a>
 <h1>Available Coffees</h1>
-<table>
+<div>
+    <a href="/add">Add Coffee</a>
+</div>
+<table border="1">
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Type</th>
         <th>Size</th>
-
+        <th>Price</th>
+        <th>Roast Level</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="coffee: ${coffeeList}">
+    <tr th:each="coffee: ${coffees}">
         <td th:text = "${coffee.id}"></td>
         <td th:text = "${coffee.name}"></td>
         <td th:text = "${coffee.type}"></td>
         <td th:text = "${coffee.size}"></td>
         <td th:text = "${coffee.price}"></td>
+        <td th:text = "${coffee.roastLevel}"></td>
         <td>
             <a th:href = "@{/delete(id=${coffee.id})}">Delete</a>
             <a th:href="@{/edit(id=${coffee.id})}">Edit</a>

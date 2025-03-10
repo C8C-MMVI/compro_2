@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit</title>
+    <title>Edit Coffee</title>
+  <style>
+    h1{
+      color: brown;
+      font-family: sans-serif;
+    }
+    form > label{
+      font-family: sans-serif;
+    }
+    a{
+      font-family: sans-serif;
+    }
+  </style>
 </head>
 <body>
-  <h1>Edit Student</h1>
+  <h1>Edit Coffee</h1>
     <form action="/update" method="post">
       <input type="hidden" name="id" th:value="${coffee.id}">
-      <label>Coffee Name: <input type="text" name="name" th:value="${student.firstName}" required></label><br>
-      <label>Coffee Type: <input type="text" name="size" th:value="${student.lastName}" required></label><br>
-      <button type="submit">Update</button>
+        <label>Coffee Name: <input type="text" name="name" th:value="${coffee.id}" required></label><br>
+        <label>Coffee Type: <input type="text" name="size" th:value="${coffee.name}" required></label><br>
+        <label>Coffee Size: <input type="text" name="name" th:value="${coffee.size}" required></label><br>
+        <label>Coffee Type: <input type="text" name="size" th:value="${coffee.price}" required></label><br>
+        <label>Coffee Type: <input type="text" name="size" th:value="${coffee.roastLevel}" required></label><br>
+        <button type="submit">Update</button>
     </form>
   <a href="/">Back to List</a>
 </body>
