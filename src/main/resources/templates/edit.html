@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+  <h1>Edit Student</h1>
+    <form action="/update" method="post">
+      <input type="hidden" name="id" th:value="${coffee.id}">
+      <label>Coffee Name: <input type="text" name="name" th:value="${student.firstName}" required></label><br>
+      <label>Coffee Type: <input type="text" name="size" th:value="${student.lastName}" required></label><br>
+      <button type="submit">Update</button>
+    </form>
+  <a href="/">Back to List</a>
+</body>
+</html>

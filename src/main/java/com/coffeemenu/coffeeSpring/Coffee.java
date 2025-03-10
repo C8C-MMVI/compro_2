@@ -29,7 +29,8 @@ public class Coffee {
      * @param flavorNotes Coffee flavor notes
      * @param brewMethod How the coffee was brewed
      */
-    public Coffee(int id, String name, String type, String size, double price, String roastLevel, String origin, boolean isDecaf, int stock, List<String> flavorNotes, String brewMethod) {
+    public Coffee(int id, String name, String type, String size, double price, String roastLevel,
+                  String origin, boolean isDecaf, int stock, List<String> flavorNotes, String brewMethod) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -58,4 +59,9 @@ public class Coffee {
     public int getStock() { return stock; }
     public List<String> getFlavorNotes() { return flavorNotes; }
     public String getBrewMethod() { return brewMethod; }
+
+    public void setName(String name) {this.name = name;}
+    public void setType(String type) {this.type = type;}
+    public void setSize(String size) {this.size = size;}
+    public void setPrice(double price) {this.price = price;}
 }

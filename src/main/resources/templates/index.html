@@ -7,7 +7,7 @@
             color: brown;
             font-family: sans-serif;
         }
-        li > span{
+        table > thead > th{
             color: red;
             font-family: sans-serif;
         }
@@ -21,11 +21,29 @@
 <body>
 <a href="/add">Add Coffee</a>
 <h1>Available Coffees</h1>
-<ul>
-    <li th:each="coffee : ${coffees}">
-        <span th:text="${coffee.name}"></span>
-        <a th:href="@{/delete(id=${coffee.id})}">Delete</a>
-    </li>
-</ul>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Size</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="coffee: ${coffeeList}">
+        <td th:text = "${coffee.id}"></td>
+        <td th:text = "${coffee.name}"></td>
+        <td th:text = "${coffee.type}"></td>
+        <td th:text = "${coffee.size}"></td>
+        <td th:text = "${coffee.price}"></td>
+        <td>
+            <a th:href = "@{/delete(id=${coffee.id})}">Delete</a>
+            <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -43,10 +43,41 @@ public class HomeController {
     }
 
     @PostMapping("/save")
-    public String saveCoffee(@RequestParam String name, @RequestParam String type){
-        System.out.println(name);
-        System.out.println(type);
-        // 9return "redirect:/";
-        return "";
+    public String saveCoffee(@RequestParam String name, @RequestParam String type, @RequestParam String size,
+                             @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
+                             @RequestParam boolean isDecaf, @RequestParam int stock, @RequestParam List<String> flavorNotes,
+                             @RequestParam String brewMethod){
+        int newId = coffeeList.get(coffeeList.size() - 1).getId() + 1;
+        coffeeList.add(new Coffee(newId, name, type, size, price, roastLevel,
+                origin, isDecaf, stock, flavorNotes, brewMethod));
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit")
+    public String editCoffee(@RequestParam int id, Model model) {
+        for (Coffee coffee : coffeeList) {
+            if (coffee.getId() == id) {
+                model.addAttribute("student", coffee);
+                return "edit";
+            }
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/update")
+    public String updateStudent(@RequestParam int id, @RequestParam String name, @RequestParam String type, @RequestParam String size,
+                                @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
+                                @RequestParam boolean isDecaf, @RequestParam int stock, @RequestParam List<String> flavorNotes,
+                                @RequestParam String brewMethod) {
+        for (Coffee coffee : coffeeList) {
+            if (coffee.getId() == id) {
+                coffee.setName(name);
+                coffee.setType(type);
+                coffee.setSize(size);
+                coffee.setPrice(price);
+                break;
+            }
+        }
+        return "redirect:/";
     }
 }

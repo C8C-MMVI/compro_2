@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <style>
+    div > label{
+        font-family: sans-serif;
+    }
+  </style>
 </head>
 <body>
   <a href="/">Home</a>
@@ -18,8 +23,19 @@
         <label for="ctype">Coffee Type</label>
         <input type="text" id="ctype" name="type">
       </div>
+
+      <div>
+        <label for="csize">Coffee Size</label>
+        <input type="text" id="csize" name="size">
+      </div>
+
+      <div>
+        <label for="cprice">Coffee Price (PHP)</label>
+        <input type="text" id="cprice" name="price">
+      </div>
       <button>Save</button>
     </form>
   </div>
+  <a href="/">Back to List</a>
 </body>
 </html>
