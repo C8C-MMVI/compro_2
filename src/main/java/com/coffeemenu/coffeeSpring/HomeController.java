@@ -45,11 +45,11 @@ public class HomeController {
     @PostMapping("/save")
     public String saveCoffee(@RequestParam String name, @RequestParam String type, @RequestParam String size,
                              @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
-                             @RequestParam boolean isDecaf, @RequestParam int stock, @RequestParam List<String> flavorNotes,
+                             @RequestParam int stock, @RequestParam List<String> flavorNotes,
                              @RequestParam String brewMethod){
         int newId = coffeeList.get(coffeeList.size() - 1).getId() + 1;
         coffeeList.add(new Coffee(newId, name, type, size, price, roastLevel,
-                origin, isDecaf, stock, flavorNotes, brewMethod));
+                origin,true, stock, flavorNotes, brewMethod));
         return "redirect:/";
     }
 
@@ -77,6 +77,9 @@ public class HomeController {
                 coffee.setPrice(price);
                 coffee.setRoastLevel(roastLevel);
                 coffee.setOrigin(origin);
+                coffee.setStock(stock);
+                coffee.setFlavorNotes(flavorNotes);
+                coffee.setBrewMethod(brewMethod);
                 break;
             }
         }

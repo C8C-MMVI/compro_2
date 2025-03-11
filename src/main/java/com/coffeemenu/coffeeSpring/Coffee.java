@@ -66,4 +66,7 @@ public class Coffee {
     public void setPrice(double price) {this.price = price;}
     public void setRoastLevel(String roastLevel) {this.roastLevel = roastLevel;}
     public void setOrigin(String origin) {this.origin = origin;}
+    public void setStock(int stock) {this.stock = stock;}
+    public void setFlavorNotes(List<String> flavorNotes) {this.flavorNotes = flavorNotes;}
+    public void setBrewMethod(String brewMethod) {this.brewMethod = brewMethod;}
 }

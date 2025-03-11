@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <title>Title</title>
   <style>
+    h1{
+      color: brown;
+      font-family: sans-serif;
+    }
     div > label{
-        font-family: monospace;
+        font-family: sans-serif;
+    }
+    a{
+        font-family: sans-serif;
+        text-decoration:none;
     }
   </style>
 </head>
@@ -35,7 +43,7 @@
 
       <div>
         <label for="croast">Roast Level</label>
-        <input type="text" id="croast" name="roast">
+        <input type="text" id="croast" name="roastLevel">
       </div>
 
       <div>
@@ -47,6 +55,17 @@
         <label for="cstock">Coffee Stock</label>
         <input type="text" id="cstock" name="stock">
       </div>
+
+      <div>
+        <label for="cflavor">Flavor Notes</label>
+        <input type="text" id="cflavor" name="flavorNotes">
+      </div>
+
+      <div>
+        <label for="cbrew">Brew Method</label>
+        <input type="text" id="cbrew" name="brewMethod">
+      </div>
+
       <button>Save</button>
     </form>
   </div>
