@@ -77,7 +77,6 @@ public class HomeController {
                 coffee.setPrice(price);
                 coffee.setRoastLevel(roastLevel);
                 coffee.setOrigin(origin);
-
                 break;
             }
         }

@@ -11,13 +11,7 @@
             color: red;
             font-family: sans-serif;
         }
-        table> tbody> tr > th{
-            font-family: sans-serif;
-        }
-        table> tbody> tr > th > td{
-            font-family: sans-serif;
-        }
-        table> tbody> tr > th > td > a{
+        table> tbody{
             font-family: sans-serif;
         }
 
@@ -48,6 +42,8 @@
         <td th:text = "${coffee.size}"></td>
         <td th:text = "${coffee.price}"></td>
         <td th:text = "${coffee.roastLevel}"></td>
+        <td th:text = "${coffee.origin}"></td>
+        <td th:text = "${coffee.stock}"></td>
         <td>
             <a th:href = "@{/delete(id=${coffee.id})}">Delete</a>
             <a th:href="@{/edit(id=${coffee.id})}">Edit</a>

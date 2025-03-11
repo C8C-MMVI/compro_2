@@ -20,11 +20,12 @@
   <h1>Edit Coffee</h1>
     <form action="/update" method="post">
       <input type="hidden" name="id" th:value="${coffee.id}">
-        <label>Coffee Name: <input type="text" name="name" th:value="${coffee.id}" required></label><br>
-        <label>Coffee Type: <input type="text" name="size" th:value="${coffee.name}" required></label><br>
-        <label>Coffee Size: <input type="text" name="name" th:value="${coffee.size}" required></label><br>
-        <label>Coffee Type: <input type="text" name="size" th:value="${coffee.price}" required></label><br>
-        <label>Coffee Type: <input type="text" name="size" th:value="${coffee.roastLevel}" required></label><br>
+        <label>Coffee Name: <input type="text" name="name" th:value="${coffee.name}" required></label><br>
+        <label>Coffee Type: <input type="text" name="size" th:value="${coffee.type}" required></label><br>
+        <label>Coffee Size: <input type="text" name="price" th:value="${coffee.price}" required></label><br>
+        <label>Roast Level: <input type="text" name="roast" th:value="${coffee.roastLevel}" required></label><br>
+        <label>Coffee Origin: <input type="text" name="origin" th:value="${coffee.origin}" required></label><br>
+      <label>Coffee Stock: <input type="text" name="stock" th:value="${coffee.stock}" required></label><br>
         <button type="submit">Update</button>
     </form>
   <a href="/">Back to List</a>
