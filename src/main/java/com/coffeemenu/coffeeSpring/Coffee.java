@@ -60,6 +60,7 @@ public class Coffee {
     public List<String> getFlavorNotes() { return flavorNotes; }
     public String getBrewMethod() { return brewMethod; }
 
+    public void setId(int id) {this.id = id;}
     public void setName(String name) {this.name = name;}
     public void setType(String type) {this.type = type;}
     public void setSize(String size) {this.size = size;}

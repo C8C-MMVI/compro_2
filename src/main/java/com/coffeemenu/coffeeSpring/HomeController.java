@@ -39,7 +39,7 @@ public class HomeController {
 
     @GetMapping("/add")
     public String addCoffeeForm(){
-        return "form";
+        return "new";
     }
 
     @PostMapping("/save")
@@ -67,7 +67,7 @@ public class HomeController {
     @PostMapping("/update")
     public String updateStudent(@RequestParam int id, @RequestParam String name, @RequestParam String type, @RequestParam String size,
                                 @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
-                                @RequestParam boolean isDecaf, @RequestParam int stock, @RequestParam List<String> flavorNotes,
+                                @RequestParam int stock, @RequestParam List<String> flavorNotes,
                                 @RequestParam String brewMethod) {
         for (Coffee coffee : coffeeList) {
             if (coffee.getId() == id) {
