@@ -2,7 +2,6 @@ package com.coffeemenu.coffeeSpring;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,7 +78,8 @@ public class CoffeeService {
                         + c.isDecaf() + ","
                         + c.getStock() + ","
                         + c.getFlavorNotes() + ","
-                        + c.getBrewMethod()
+                        + c.getBrewMethod() + ","
+                        + c.getLevel()
                 );
                 bw.newLine();
             }
@@ -111,8 +111,9 @@ public class CoffeeService {
                 c.setRoastLevel(data[4]);
                 c.setOrigin(data[5]);
                 c.setStock(Integer.parseInt(data[6]));
-                c.setFlavorNotes(Collections.singletonList(data[7]));
+                c.setFlavorNotes(data[7]);
                 c.setBrewMethod(data[8]);
+                c.setLevel(Integer.parseInt(data[9]));
                 coffee.add(c);
             }
         }catch(IOException e){

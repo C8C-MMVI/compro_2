@@ -12,76 +12,82 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    private List<Coffee> coffeeList = new ArrayList<>();
+    CoffeeService coffeeService;
 
-    /**
-     * Displays the following ArrayList into the website
-     */
-    public HomeController() {
-        coffeeList.add(new Coffee(1, "Espresso", "Arabica", "Small", 3.50, "Dark", "Ethiopia", false, 10, Arrays.asList("Chocolate", "Nutty"), "Espresso"));
-        coffeeList.add(new Coffee(2, "Latte", "Arabica", "Medium", 4.50, "Medium", "Brazil", false, 8, Arrays.asList("Creamy", "Sweet"), "Drip"));
-        coffeeList.add(new Coffee(3, "Cappuccino", "Robusta", "Large", 5.00, "Medium", "Colombia", false, 12, Arrays.asList("Fruity", "Bold"), "French Press"));
-        coffeeList.add(new Coffee(4, "Mocha", "Arabica", "Medium", 4.75, "Dark", "Guatemala", false, 6, Arrays.asList("Chocolate", "Smooth"), "Espresso"));
-        coffeeList.add(new Coffee(5, "Americano", "Robusta", "Large", 3.25, "Light", "Kenya", false, 15, Arrays.asList("Citrus", "Balanced"), "Drip"));
+    public CoffeeController() {
+        coffeeService = new CoffeeService();
     }
 
+
     @GetMapping("/")
-    public String getCoffees(Model model) {
-        model.addAttribute("coffees", coffeeList);
+    public String index(@RequestParam(defaultValue = "") String search, Model model) {
+        model.addAttribute("coffees", coffeeService.searchCoffee(search));
         return "index";
     }
 
     @GetMapping("/delete")
     public String deleteCoffee(@RequestParam int id) {
-        coffeeList.removeIf(coffee -> coffee.getId() == id); // Lets the user delete any of the coffee options
+        coffeeService.deleteCoffee(id); // Lets the user delete any of the coffee options
         return "redirect:/";
     }
 
-    @GetMapping("/add")
-    public String addCoffeeForm(){
+    @GetMapping("/new")
+    public String createCoffee(Model model){
+        int[] levels = {1,2,3,4};
+        model.addAttribute("levels", levels);
         return "new";
     }
 
     @PostMapping("/save")
     public String saveCoffee(@RequestParam String name, @RequestParam String type, @RequestParam String size,
                              @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
-                             @RequestParam int stock, @RequestParam List<String> flavorNotes,
-                             @RequestParam String brewMethod){
-        int newId = coffeeList.get(coffeeList.size() - 1).getId() + 1;
-        coffeeList.add(new Coffee(newId, name, type, size, price, roastLevel,
-                origin,true, stock, flavorNotes, brewMethod));
+                             @RequestParam (required = false) boolean isDecaf, @RequestParam int stock,
+                             @RequestParam List<String> flavorNotes,
+                             @RequestParam String brewMethod, @RequestParam int level){
+        Coffee c = new Coffee(coffeeService.getLastId() + 1,
+                name,
+                type,
+                size,
+                price,
+                roastLevel,
+                origin,
+                isDecaf,
+                stock,
+                flavorNotes,
+                brewMethod,
+                level);
+        coffeeService.addCoffee(c);
         return "redirect:/";
     }
 
     @GetMapping("/edit")
     public String editCoffee(@RequestParam int id, Model model) {
-        for (Coffee coffee : coffeeList) {
-            if (coffee.getId() == id) {
-                model.addAttribute("coffee", coffee);
-                return "edit";
-            }
+        Coffee c = coffeeService.getCoffee(id);
+        if(c != null){
+            int[] levels = {1,2,3,4};
+            model.addAttribute("levels", levels);
+            model.addAttribute("coffee", c);
+            return "edit";
         }
         return "redirect:/";
     }
 
     @PostMapping("/update")
-    public String updateStudent(@RequestParam int id, @RequestParam String name, @RequestParam String type, @RequestParam String size,
-                                @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
-                                @RequestParam int stock, @RequestParam List<String> flavorNotes,
-                                @RequestParam String brewMethod) {
-        for (Coffee coffee : coffeeList) {
-            if (coffee.getId() == id) {
-                coffee.setName(name);
-                coffee.setType(type);
-                coffee.setSize(size);
-                coffee.setPrice(price);
-                coffee.setRoastLevel(roastLevel);
-                coffee.setOrigin(origin);
-                coffee.setStock(stock);
-                coffee.setFlavorNotes(flavorNotes);
-                coffee.setBrewMethod(brewMethod);
-                break;
-            }
+    public String store(@RequestParam int id, @RequestParam String name, @RequestParam String type, @RequestParam String size,
+                        @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
+                        @RequestParam (required = false) boolean isDecaf, @RequestParam int stock,
+                        @RequestParam List<String> flavorNotes,
+                        @RequestParam String brewMethod, @RequestParam int level) {
+        Coffee c = coffeeService.getCoffee(id);
+        if (c != null){
+            c.setName(name);
+            c.setType(type);
+            c.setSize(size);
+            c.setPrice(price);
+            c.setRoastLevel(roastLevel);
+            c.setOrigin(origin);
+            c.isDecaf();
+            c.setStock(stock);
         }
         return "redirect:/";
     }
