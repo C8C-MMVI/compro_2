@@ -6,15 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class HomeController {
     CoffeeService coffeeService;
 
-    public CoffeeController() {
+    public HomeController() {
         coffeeService = new CoffeeService();
     }
 
@@ -33,17 +31,19 @@ public class HomeController {
 
     @GetMapping("/new")
     public String createCoffee(Model model){
-        int[] levels = {1,2,3,4};
-        model.addAttribute("levels", levels);
         return "new";
     }
 
     @PostMapping("/save")
-    public String saveCoffee(@RequestParam String name, @RequestParam String type, @RequestParam String size,
-                             @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
-                             @RequestParam (required = false) boolean isDecaf, @RequestParam int stock,
+    public String saveCoffee(@RequestParam (required = true) String name,
+                             @RequestParam (required = false) String type,
+                             @RequestParam (required = true) String size,
+                             @RequestParam (required = true) double price,
+                             @RequestParam String roastLevel,
+                             @RequestParam String origin,
+                             @RequestParam (required = true) int stock,
                              @RequestParam List<String> flavorNotes,
-                             @RequestParam String brewMethod, @RequestParam int level){
+                             @RequestParam String brewMethod){
         Coffee c = new Coffee(coffeeService.getLastId() + 1,
                 name,
                 type,
@@ -51,11 +51,10 @@ public class HomeController {
                 price,
                 roastLevel,
                 origin,
-                isDecaf,
+                false,
                 stock,
                 flavorNotes,
-                brewMethod,
-                level);
+                brewMethod);
         coffeeService.addCoffee(c);
         return "redirect:/";
     }
@@ -73,11 +72,16 @@ public class HomeController {
     }
 
     @PostMapping("/update")
-    public String store(@RequestParam int id, @RequestParam String name, @RequestParam String type, @RequestParam String size,
-                        @RequestParam double price, @RequestParam String roastLevel, @RequestParam String origin,
-                        @RequestParam (required = false) boolean isDecaf, @RequestParam int stock,
+    public String store(@RequestParam int id,
+                        @RequestParam (required = true) String name,
+                        @RequestParam (required = false) String type,
+                        @RequestParam (required = true) String size,
+                        @RequestParam (required = true) double price,
+                        @RequestParam String roastLevel,
+                        @RequestParam String origin,
+                        @RequestParam (required = true) int stock,
                         @RequestParam List<String> flavorNotes,
-                        @RequestParam String brewMethod, @RequestParam int level) {
+                        @RequestParam String brewMethod) {
         Coffee c = coffeeService.getCoffee(id);
         if (c != null){
             c.setName(name);
@@ -86,8 +90,11 @@ public class HomeController {
             c.setPrice(price);
             c.setRoastLevel(roastLevel);
             c.setOrigin(origin);
-            c.isDecaf();
             c.setStock(stock);
+            c.setFlavorNotes(flavorNotes);
+            c.setBrewMethod(brewMethod);
+
+            coffeeService.updateCoffee(id, c);
         }
         return "redirect:/";
     }
