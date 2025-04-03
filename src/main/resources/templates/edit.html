@@ -4,33 +4,57 @@
     <meta charset="UTF-8">
     <title>Edit Coffee</title>
   <style>
-    h1{
-      color: brown;
-      font-family: sans-serif;
-    }
-    form > label{
-      font-family: sans-serif;
-    }
-    a{
-      font-family: sans-serif;
-      text-decoration:none;
-    }
+    body{
+         font-family: sans-serif;
+         background-color: #D4C9BE;
+     }
+
+     h1{
+         text-align: center;
+         border: 1px solid #A62C2C;
+         border-radius: 15px;
+         background-color: #A62C2C;
+         color: #ffffff;
+         text-transform: uppercase;
+     }
+
+     a{
+         display: flex;
+         justify-content: center;
+         border: 1px solid #620000;
+         border-radius: 5px;
+         padding: 5px 15px;
+         text-decoration: none;
+         font-weight: bold;
+         margin: auto 20%;
+         color: #ffffff;
+         background-color: #E83F25;
+     }
+
+     a:hover{
+         color: #7D0A0A;
+     }
+
+     form> button{
+         font-size: 14px;
+         padding: auto;
+     }
   </style>
 </head>
 <body>
   <h1>Edit Coffee</h1>
-    <form action="/update" method="post">
-      <input type="hidden" name="id" th:value="${coffee.id}">
-        <label>Coffee Name: <input type="text" name="name" th:value="${coffee.name}" required></label><br>
-        <label>Coffee Type: <input type="text" name="type" th:value="${coffee.type}" required></label><br>
-        <label>Coffee Size: <input type="text" name="size" th:value="${coffee.size}" required></label><br>
-        <label>Coffee Price: <input type="text" name="price" th:value="${coffee.price}" required></label><br>
-        <label>Roast Level: <input type="text" name="roastLevel" th:value="${coffee.roastLevel}" required></label><br>
-        <label>Coffee Origin: <input type="text" name="origin" th:value="${coffee.origin}" required></label><br>
-        <label>Coffee Stock: <input type="text" name="stock" th:value="${coffee.stock}" required></label><br>
-        <label>Flavor Notes: <input type="text" name="flavorNotes" th:value="${coffee.flavorNotes}" required></label><br>
-        <label>Brew Method: <input type="text" name="brewMethod" th:value="${coffee.brewMethod}" required></label><br>
-        <button type="submit">Update</button>
+  <form action="/update" method="post">
+    <input type="hidden" name="id" th:value="${coffee.id}">
+      <label>Coffee Name: <input type="text" name="name" th:value="${coffee.name}" required></label><br>
+      <label>Coffee Type: <input type="text" name="type" th:value="${coffee.type}" required></label><br>
+      <label>Coffee Size: <input type="text" name="size" th:value="${coffee.size}" required></label><br>
+      <label>Coffee Price: <input type="text" name="price" th:value="${coffee.price}" required></label><br>
+      <label>Roast Level: <input type="text" name="roastLevel" th:value="${coffee.roastLevel}" required></label><br>
+      <label>Coffee Origin: <input type="text" name="origin" th:value="${coffee.origin}" required></label><br>
+      <label>Coffee Stock: <input type="text" name="stock" th:value="${coffee.stock}" required></label><br>
+      <label>Flavor Notes: <input type="text" name="flavorNotes" th:value="${coffee.flavorNotes}" required></label><br>
+      <label>Brew Method: <input type="text" name="brewMethod" th:value="${coffee.brewMethod}" required></label><br>
+      <button type="submit">Update</button>
     </form>
   <a href="/">Back to List</a>
 </body>
