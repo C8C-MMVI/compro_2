@@ -128,7 +128,7 @@
         <td th:text = "${coffee.stock}"></td>
         <td th:text = "${coffee.flavorNotes}"></td>
         <td th:text = "${coffee.brewMethod}"></td>
-        <td class="action">
+        <td class="actions">
             <a th:href = "@{/delete(id=${coffee.id})}">Delete</a>
             <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
         </td>

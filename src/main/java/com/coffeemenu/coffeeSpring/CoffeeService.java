@@ -32,6 +32,14 @@ public class CoffeeService {
         return coffee.stream().filter(c ->
                 c.getName().toLowerCase().contains(keyword.toLowerCase())
                 || c.getType().toLowerCase().contains(keyword.toLowerCase())
+                || c.getSize().toLowerCase().contains(keyword.toLowerCase())
+                || String.valueOf(c.getPrice()).contains(keyword.toLowerCase())
+                || c.getRoastLevel().toLowerCase().contains(keyword.toLowerCase())
+                || c.getOrigin().toLowerCase().contains(keyword.toLowerCase())
+                || String.valueOf(c.isDecaf()).contains(keyword.toLowerCase())
+                || String.valueOf(c.getStock()).contains(keyword.toLowerCase())
+                || c.getFlavorNotes().stream().anyMatch(note -> note.toLowerCase().contains(keyword.toLowerCase()))
+                || c. getBrewMethod().toLowerCase().contains(keyword.toLowerCase())
         ).collect(Collectors.toList());
     }
 
@@ -108,11 +116,13 @@ public class CoffeeService {
                 c.setName(data[1]);
                 c.setType(data[2]);
                 c.setSize(data[3]);
-                c.setRoastLevel(data[4]);
-                c.setOrigin(data[5]);
-                c.setStock(Integer.parseInt(data[6]));
-                c.setFlavorNotes(Collections.singletonList(data[7]));
-                c.setBrewMethod(data[8]);
+                c.setPrice(Double.parseDouble(data[4]));
+                c.setRoastLevel(data[5]);
+                c.setOrigin(data[6]);
+                Boolean.parseBoolean(data[7]);
+                c.setStock(Integer.parseInt(data[8]));
+                c.setFlavorNotes(Collections.singletonList(data[9]));
+                c.setBrewMethod(data[10]);
                 coffee.add(c);
             }
         }catch(IOException e){
