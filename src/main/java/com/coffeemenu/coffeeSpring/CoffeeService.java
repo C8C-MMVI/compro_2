@@ -86,7 +86,7 @@ public class CoffeeService {
                         + c.getOrigin() + ","
                         + c.isDecaf() + ","
                         + c.getStock() + ","
-                        + c.getFlavorNotes() + ","
+                        + String.join(";", c.getFlavorNotes())+ ","
                         + c.getBrewMethod()
                 );
                 bw.newLine();
@@ -110,19 +110,15 @@ public class CoffeeService {
             String line;
             while((line = br.readLine()) != null){
                 String[] data = line.split(",");
+                List<String> flavorNotes = List.of(data[9].split(";"));
 
-                Coffee c = new Coffee();
-                c.setId(Integer.parseInt(data[0]));
-                c.setName(data[1]);
-                c.setType(data[2]);
-                c.setSize(data[3]);
-                c.setPrice(Double.parseDouble(data[4]));
-                c.setRoastLevel(data[5]);
-                c.setOrigin(data[6]);
-                Boolean.parseBoolean(data[7]);
-                c.setStock(Integer.parseInt(data[8]));
-                c.setFlavorNotes(Collections.singletonList(data[9]));
-                c.setBrewMethod(data[10]);
+                Coffee c = new Coffee(
+                        Integer.parseInt(data[0]),
+                        data[1], data[2],
+                        data[3], Double.parseDouble(data[4]),
+                        data[5], data[6],
+                        Boolean.parseBoolean(data[7]), Integer.parseInt(data[8]),
+                        flavorNotes, data[10]);
                 coffee.add(c);
             }
         }catch(IOException e){
