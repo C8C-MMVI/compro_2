@@ -2,138 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Coffee List</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-    :root{
-        --primary-color: #2c3e8c;
-        --border-color: #3498db;
-        --danger-color: #e74c3c;
-        --warning-color: #21618c;
-        --main-font: "Roboto", sans-serif;
-    }
-
-    body{
-        font-family: var(--main-font);
-        background-color: #D4C9BE;
-    }
-
-    h1{
-        text-align: center;
-        border: 1px solid #A62C2C;
-        border-radius: 15px;
-        background-color: #A62C2C;
-        color: #ffffff;
-        text-transform: uppercase;
-    }
-
-    .add{
-        display: flex;
-        border: 1px solid #620000;
-        border-radius: 5px;
-        justify-content: center;
-        margin: auto 20%;
-        background-color: #E83F25;
-    }
-
-    .add > a{
-        padding: 5px 15px;
-        text-decoration: none;
-        font-weight: bold;
-        color: #ffffff;
-    }
-
-    .add > a:hover{
-        color: #7D0A0A;
-    }
-
-    .search{
-        margin: 10px auto;
-        display: flex;
-        justify-content: center;
-    }
-
-    table{
-        border-collapse: collapse;
-
-    }
-
-    th,td{
-        background-color: #ffffff;
-        border: 1px solid var(--border-color);
-        padding: 10px;
-    }
-
-    th{
-        text-align:center;
-        font-weight: bold;
-    }
-
-    .actions a{
-        text-decoration:none;
-        padding: 6px 12px;
-        cursor: pointer;
-        font-size: 0.8em;
-        border-radius: 4px;
-        color: white;
-    }
-
-    .actions a:first-child{
-        background-color: var(--danger-color);
-    }
-
-    .actions a:nth-child(2){
-        background-color: var(--warning-color);
-    }
-    </style>
+    <link th:href="@{/css/indexStyle.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Available Coffees</h1>
-<div class="add">
-    <a href="/new">Add Coffee</a>
-</div>
+<header>
+    <div>
+        <h1>COFFEE COFFEE</h1>
+    </div>
+</header>
+<main>
+    <div class="options">
+        <div><a href="/new">Add Coffee</a></div>
+        <div id="search">
+            <form>
+                <input type="text" name="search" placeholder="Search Coffee">
+                <button>Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="tableCoffee">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Roast Level</th>
+                <th>Origin</th>
+                <th>Decaf</th>
+                <th>Stock</th>
+                <th>Flavor Notes</th>
+                <th>Brew Method</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coffee: ${coffees}">
+                <td th:text = "${coffee.id}"></td>
+                <td th:text = "${coffee.name}"></td>
+                <td th:text = "${coffee.type}"></td>
+                <td th:text = "${coffee.size}"></td>
+                <td th:text = "${coffee.price}"></td>
+                <td th:text = "${coffee.roastLevel}"></td>
+                <td th:text = "${coffee.origin}"></td>
+                <td th:text = "${coffee.isDecaf}"></td>
+                <td th:text = "${coffee.stock}"></td>
+                <td th:text = "${coffee.flavorNotes}"></td>
+                <td th:text = "${coffee.brewMethod}"></td>
+                <td class="actions">
+                    <a th:href = "@{/delete(id=${coffee.id})}">Delete</a>
+                    <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<footer>
+    <h1>COFFEE COFFEE</h1>
+    <p>All Rights Reserved. Copyright 2025 by Allon-sy Co.</p>
+</footer>
 
-<form class="search">
-    <input type="text" name="search" placeholder="Search...">
-    <button>Search</button>
-</form>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Size</th>
-        <th>Price</th>
-        <th>Roast Level</th>
-        <th>Origin</th>
-        <th>Decaf</th>
-        <th>Stock</th>
-        <th>Flavor Notes</th>
-        <th>Brew Method</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="coffee: ${coffees}">
-        <td th:text = "${coffee.id}"></td>
-        <td th:text = "${coffee.name}"></td>
-        <td th:text = "${coffee.type}"></td>
-        <td th:text = "${coffee.size}"></td>
-        <td th:text = "${coffee.price}"></td>
-        <td th:text = "${coffee.roastLevel}"></td>
-        <td th:text = "${coffee.origin}"></td>
-        <td th:text = "${coffee.isDecaf}"></td>
-        <td th:text = "${coffee.stock}"></td>
-        <td th:text = "${coffee.flavorNotes}"></td>
-        <td th:text = "${coffee.brewMethod}"></td>
-        <td class="actions">
-            <a th:href = "@{/delete(id=${coffee.id})}">Delete</a>
-            <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+
+
 </body>
 </html>

@@ -1,11 +1,14 @@
 package com.coffeemenu.coffeeSpring;
 
+import org.springframework.stereotype.Service;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class CoffeeService {
     private ArrayList<Coffee> coffee;
     private static final String FILE_NAME = "coffee.csv";
@@ -62,6 +65,7 @@ public class CoffeeService {
         }
     }
     public void addCoffee(Coffee coffees){
+//        coffee.setId(getLastId() + 1);
         coffee.add(coffees);
         writeToDisk();
     }

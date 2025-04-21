@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -44,15 +44,17 @@
 <body>
   <h1>New Coffee</h1>
   <div>
-    <form action="/save" method="POST">
+    <form th:action="@{/save}" method="POST" th:object = "${newCoffee}">
       <div>
         <label for="cname">Coffee Name</label>
         <input type="text" id="cname" name="name" required>
       </div>
 
       <div>
-        <label for="ctype">Coffee Type</label>
-        <input type="text" id="ctype" name="type">
+        <label>Coffee Type</label>
+        <select th:field="*{type}" id="type">
+          <option value="Arabica"></option>
+        </select>
       </div>
 
       <div>

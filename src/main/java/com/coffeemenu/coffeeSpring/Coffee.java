@@ -1,9 +1,12 @@
 package com.coffeemenu.coffeeSpring;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 public class Coffee {
     private int id;
+    @NotBlank(message = "Coffee name is required")
     private String name;
     private String type;
     private String size;
@@ -15,6 +18,7 @@ public class Coffee {
     private List<String> flavorNotes;
     private String brewMethod;
 
+    // Parameterless / Default constructor
     public Coffee(){
 
     }
@@ -66,13 +70,36 @@ public class Coffee {
     public String getBrewMethod() { return brewMethod; }
 
     public void setId(int id) {this.id = id;}
-    public void setName(String name) {this.name = name;}
+
+    public void setName(String name) {
+       name = name.trim();
+
+       String[] names = name.split("\\s");
+       this.name="";
+
+       for(String coffeeName : names ){
+           if(!this.name.isEmpty())
+               this.name += " ";
+           if(name.length() > 2)
+               this.name += coffeeName.substring(0,1).toUpperCase() +
+                       coffeeName.substring(1, coffeeName.length());
+           else
+               this.name += coffeeName.toUpperCase();
+       }
+    }
     public void setType(String type) {this.type = type;}
+
     public void setSize(String size) {this.size = size;}
+
     public void setPrice(double price) {this.price = price;}
+
     public void setRoastLevel(String roastLevel) {this.roastLevel = roastLevel;}
+
     public void setOrigin(String origin) {this.origin = origin;}
+
     public void setStock(int stock) {this.stock = stock;}
+
     public void setFlavorNotes(List<String> flavorNotes) {this.flavorNotes = flavorNotes;}
+
     public void setBrewMethod(String brewMethod) {this.brewMethod = brewMethod;}
 }
