@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --boldColor: #FFF0DC;
+    --coffeeFont: "Special Gothic Expanded One", sans-serif;
+    --baseFont: "Montserrat", sans-serif;
+    --lightFontColor: #543A14;
+    --borderColor:5px solid #A27B5C;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #3F4F44;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    margin: 0;
+    padding: 10px 15px;
+    background-color: #2C3930;
+}
+
+h1{
+    color: var(--boldColor);
+    font-family: var(--coffeeFont);
+    font-size: 32px;
+    letter-spacing: 5px;
+}
+
+main{
+    flex: 1;
+}
+
+main > h2{
+    text-align: center;
+    font-family: var(--baseFont);
+    color: beige;
+}
+
+.add-form{
+    display: flex;
+    flex-direction: column;
+    background-color: #DCD7C9;
+    width: 340px;
+    margin: 0 auto 40px;
+    padding: 20px;
+    border-radius: 10px;
+    color: var(--lightFontColor);
+    font-family: var(--baseFont);
+    border-top: var(--borderColor);
+    border-left: var(--borderColor);
+}
+
+.add-form  form > div{
+    display: flex;
+    font-family: var(--baseFont);
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.add-form label {
+    width: 130px;
+    font-size: 16px;
+}
+
+.add-form input{
+    flex: 1;
+    padding: 4px;
+    font-family: var(--baseFont);
+    font-size: 14px;
+}
+
+
+#formActions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+#formActions button{
+    font-size: 14px;
+    margin-top: 15px;
+    background-color: #A27B5C;
+    font-family: var(--baseFont);
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 14%;
+    border: none;
+}
+
+#formActions button:hover{
+    background-color: white;
+    color: #A27B5C;
+    text-decoration: underline;
+}
+
+#formActions a{
+    margin-top: 5px;
+    padding: 3px 20px;
+    text-decoration: none;
+    font-family: var(--baseFont);
+    font-weight: bold;
+    background-color: #A27B5C;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#formActions a:hover{
+    background-color: white;
+    color: #A27B5C;
+    text-decoration: underline;
+}
+
+footer{
+    background-color: #2C3930;
+    color: var(--boldColor);
+    font-family: var(--baseFont);
+    font-weight: bold;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer > h1 {
+    font-family: var(--coffeeFont);
+    font-size: 20px;
+    margin: 0;
+}
+
+footer > p {
+    margin: 0;
+    font-size: 14px;
+}

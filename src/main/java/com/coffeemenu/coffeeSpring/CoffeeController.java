@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class CoffeeController {
 
     @Autowired
     CoffeeService coffeeService;
 
-    public HomeController() {
-        coffeeService = new CoffeeService();
-    }
+//    public CoffeeController() {
+//        coffeeService = new CoffeeService();
+//    }
 
 
     @GetMapping("/")
@@ -34,6 +34,8 @@ public class HomeController {
 
     @GetMapping("/new")
     public String createCoffee(Model model){
+        String [] beanType = {"Arabica", "Robusta", "Liberica"};
+        model.addAttribute("beanType", beanType);
         return "new";
     }
 

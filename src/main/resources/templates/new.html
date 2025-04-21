@@ -2,59 +2,27 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-  <style>
-    body{
-        font-family: sans-serif;
-        background-color: #D4C9BE;
-    }
-
-    h1{
-        text-align: center;
-        border: 1px solid #A62C2C;
-        border-radius: 15px;
-        background-color: #A62C2C;
-        color: #ffffff;
-        text-transform: uppercase;
-    }
-
-    a{
-        display: flex;
-        justify-content: center;
-        border: 1px solid #620000;
-        border-radius: 5px;
-        padding: 5px 15px;
-        text-decoration: none;
-        font-weight: bold;
-        margin: auto 20%;
-        color: #ffffff;
-        background-color: #E83F25;
-    }
-
-    a:hover{
-        color: #7D0A0A;
-    }
-
-    div > form> button{
-        font-size: 14px;
-        padding: auto;
-    }
-  </style>
+    <title>Add Coffee</title>
+  <link th:href="@{/css/formStyle.css}"rel="stylesheet">
 </head>
 <body>
-  <h1>New Coffee</h1>
+<header>
   <div>
-    <form th:action="@{/save}" method="POST" th:object = "${newCoffee}">
+    <h1>COFFEE COFFEE</h1>
+  </div>
+</header>
+<main>
+  <h2>New Coffee</h2>
+  <div class="add-form">
+    <form th:action="@{/save}" method="POST">
       <div>
         <label for="cname">Coffee Name</label>
         <input type="text" id="cname" name="name" required>
       </div>
 
       <div>
-        <label>Coffee Type</label>
-        <select th:field="*{type}" id="type">
-          <option value="Arabica"></option>
-        </select>
+        <label for="ctype">Coffee Type</label>
+        <input type="text" id="ctype" name="type" required>
       </div>
 
       <div>
@@ -92,9 +60,18 @@
         <input type="text" id="cbrew" name="brewMethod">
       </div>
 
-      <button>Save</button>
+      <div id="formActions">
+        <button>Save</button>
+        <a href="/">Back to List</a>
+      </div>
+
     </form>
   </div>
-  <a href="/">Back to List</a>
+
+</main>
+<footer>
+  <h1>COFFEE COFFEE</h1>
+  <p>All Rights Reserved. Copyright 2025 by Allon-sy Co.</p>
+</footer>
 </body>
 </html>

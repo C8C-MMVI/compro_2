@@ -16,6 +16,9 @@ html, body {
     margin: 0;
     padding: 0;
     background: #3F4F44;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 header{
@@ -31,7 +34,9 @@ h1{
     letter-spacing: 5px;
 }
 main{
+    flex: 1;
     margin: 20px auto;
+    width: 100%;
 }
 
 .options{
@@ -131,18 +136,23 @@ th, td{
 }
 
 footer{
-    padding: 10px 15px;
-    margin-top: 4.75%;
-    display: flex;
     background-color: #2C3930;
-}
-
-footer > p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: var(--boldColor);
     font-family: var(--baseFont);
     font-weight: bold;
-    margin-left: 40px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer > h1 {
+    font-family: var(--coffeeFont);
+    font-size: 20px;
+    margin: 0;
+}
+
+footer > p {
+    margin: 0;
+    font-size: 14px;
 }
