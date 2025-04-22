@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,9 +17,7 @@ public class CoffeeService {
         readFromDisk();
     }
 
-    public ArrayList<Coffee> getCoffee() {
-        return coffee;
-    }
+    public ArrayList<Coffee> getCoffee() {return coffee;}
 
     public void deleteCoffee(int id){
         coffee.removeIf(coffee -> coffee.getId() == id);

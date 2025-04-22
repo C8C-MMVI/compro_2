@@ -67,13 +67,12 @@ main > h2{
     font-size: 16px;
 }
 
-.add-form input{
+.add-form input, .add-form select{
     flex: 1;
     padding: 4px;
     font-family: var(--baseFont);
     font-size: 14px;
 }
-
 
 #formActions{
     display: flex;

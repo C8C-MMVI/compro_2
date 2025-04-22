@@ -15,11 +15,6 @@ public class CoffeeController {
     @Autowired
     CoffeeService coffeeService;
 
-//    public CoffeeController() {
-//        coffeeService = new CoffeeService();
-//    }
-
-
     @GetMapping("/")
     public String index(@RequestParam(defaultValue = "") String search, Model model) {
         model.addAttribute("coffees", coffeeService.searchCoffee(search));
@@ -36,17 +31,23 @@ public class CoffeeController {
     public String createCoffee(Model model){
         String [] beanType = {"Arabica", "Robusta", "Liberica"};
         model.addAttribute("beanType", beanType);
+        String [] coffeeRoast = {"Low", "Medium", "High"};
+        model.addAttribute("coffeeRoast", coffeeRoast);
+        String [] coffeeFlavorNotes= {"Strong", "Bitter", "Nutty", "Milky", "Chocolatey"};
+        model.addAttribute("coffeeFlavorNotes", coffeeFlavorNotes);
+        String [] coffeeBrew = {"Drip", "Espresso machine", "Cold Brew", "French Press", "Moka pot"};
+        model.addAttribute("coffeeBrew", coffeeBrew);
         return "new";
     }
 
     @PostMapping("/save")
-    public String saveCoffee(@RequestParam (required = true) String name,
-                             @RequestParam (required = false) String type,
-                             @RequestParam (required = true) String size,
-                             @RequestParam (required = true) double price,
+    public String saveCoffee(@RequestParam String name,
+                             @RequestParam String type,
+                             @RequestParam String size,
+                             @RequestParam double price,
                              @RequestParam String roastLevel,
                              @RequestParam String origin,
-                             @RequestParam (required = true) int stock,
+                             @RequestParam int stock,
                              @RequestParam List<String> flavorNotes,
                              @RequestParam String brewMethod){
         Coffee c = new Coffee(coffeeService.getLastId() + 1,

@@ -45,7 +45,7 @@ main{
     justify-content: center;
     align-items: center;
     width: 35%;
-    height: 35px;
+    height: 5%;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
@@ -112,7 +112,7 @@ th, td{
     font-family: var(--baseFont);
     color: var(--lightFontColor);
     background-color: #DCD7C9;
-    border: 1px solid var(--borderColorOnly);
+    border: 2px solid var(--borderColorOnly);
     text-align: center;
     padding: 5px;
 }

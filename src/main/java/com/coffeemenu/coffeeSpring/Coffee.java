@@ -6,16 +6,22 @@ import java.util.List;
 
 public class Coffee {
     private int id;
-    @NotBlank(message = "Coffee name is required")
-    private String name;
+    @NotBlank(message = "* Coffee name is required")
+    private String name; //min=2; max=50
+    @NotBlank(message = "* Select a coffee bean type")
     private String type;
+    @NotBlank(message = "* Coffee size is required")
     private String size;
+    @NotBlank(message = "* Coffee price is needed")
     private double price;
+    @NotBlank(message = "* Coffee bean roast level is needed")
     private String roastLevel;
     private String origin;
     private boolean isDecaf;
-    private int stock;
+    @NotBlank(message = "* No. of stock is needed")
+    private int stock; //min=0
     private List<String> flavorNotes;
+    @NotBlank(message = "* Brew method is needed")
     private String brewMethod;
 
     // Parameterless / Default constructor

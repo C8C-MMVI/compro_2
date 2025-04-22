@@ -22,12 +22,27 @@
 
       <div>
         <label for="ctype">Coffee Type</label>
-        <input type="text" id="ctype" name="type" required>
+        <select name="type" id="ctype">
+          <option value="arabica">Arabica</option>
+          <option value="robusta">Robusta</option>
+          <option value="liberica">Liberica</option>
+        </select>
+
+<!--        <select th:field="*{ctype}" id="ctype">-->
+<!--          <option th:each="ctype:${beanType}"-->
+<!--                  th:value="${ctype}">-->
+<!--          </option>-->
+<!--        </select>-->
       </div>
 
       <div>
         <label for="csize">Coffee Size</label>
-        <input type="text" id="csize" name="size" required>
+        <select name="type" id="csize">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+<!--        <input type="text" id="csize" name="size" required>-->
       </div>
 
       <div>
@@ -43,6 +58,11 @@
       <div>
         <label for="corigin">Coffee Origin</label>
         <input type="text" id="corigin" name="origin">
+      </div>
+
+      <div>
+        <label for="decaf">Decaf?</label>
+        <input type="text" id="decaf">
       </div>
 
       <div>
