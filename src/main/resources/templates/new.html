@@ -17,7 +17,9 @@
     <form th:action="@{/save}" method="POST">
       <div>
         <label for="cname">Coffee Name</label>
-        <input type="text" id="cname" name="name" required>
+        <input type="text" id="cname"  name="name" th:field="*{name}"
+               th:classappend="${#fields.hasErrors('name')} ? 'error' : '' ">
+        <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
       </div>
 
       <div>
@@ -42,7 +44,6 @@
           <option value="medium">Medium</option>
           <option value="large">Large</option>
         </select>
-<!--        <input type="text" id="csize" name="size" required>-->
       </div>
 
       <div>
@@ -61,8 +62,8 @@
       </div>
 
       <div>
-        <label for="decaf">Decaf?</label>
-        <input type="text" id="decaf">
+        <label for="decaf">Decaf</label>
+        <input type="checkbox" id="decaf">
       </div>
 
       <div>

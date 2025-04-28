@@ -62,7 +62,7 @@ public class CoffeeService {
         }
     }
     public void addCoffee(Coffee coffees){
-//        coffee.setId(getLastId() + 1);
+        coffees.setId(getLastId() + 1);
         coffee.add(coffees);
         writeToDisk();
     }

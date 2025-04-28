@@ -7,6 +7,7 @@
     --baseFont: "Montserrat", sans-serif;
     --lightFontColor: #543A14;
     --borderColor:5px solid #A27B5C;
+    --color-error: #E83F25;
 }
 
 html, body {
@@ -127,6 +128,12 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.error {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
 footer > h1 {
