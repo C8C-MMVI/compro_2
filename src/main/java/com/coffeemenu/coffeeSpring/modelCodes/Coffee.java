@@ -1,4 +1,4 @@
-package com.coffeemenu.coffeeSpring;
+package com.coffeemenu.coffeeSpring.modelCodes;
 
 import jakarta.validation.constraints.NotBlank;
 

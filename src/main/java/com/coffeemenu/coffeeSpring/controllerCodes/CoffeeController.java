@@ -1,5 +1,7 @@
-package com.coffeemenu.coffeeSpring;
+package com.coffeemenu.coffeeSpring.controllerCodes;
 
+import com.coffeemenu.coffeeSpring.modelCodes.Coffee;
+import com.coffeemenu.coffeeSpring.serviceCodes.CoffeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +16,6 @@ public class CoffeeController {
 
     @Autowired
     CoffeeService coffeeService;
-
-//    public CoffeeController() {
-//        coffeeService = new CoffeeService();
-//    }
-
 
     @GetMapping("/")
     public String index(@RequestParam(defaultValue = "") String search, Model model) {
@@ -40,13 +37,14 @@ public class CoffeeController {
     }
 
     @PostMapping("/save")
-    public String saveCoffee(@RequestParam (required = true) String name,
-                             @RequestParam (required = false) String type,
-                             @RequestParam (required = true) String size,
-                             @RequestParam (required = true) double price,
+    public String saveCoffee(@RequestParam String name,
+                             @RequestParam String type,
+                             @RequestParam String size,
+                             @RequestParam double price,
                              @RequestParam String roastLevel,
                              @RequestParam String origin,
-                             @RequestParam (required = true) int stock,
+                             @RequestParam Boolean isDecaf,
+                             @RequestParam int stock,
                              @RequestParam List<String> flavorNotes,
                              @RequestParam String brewMethod){
         Coffee c = new Coffee(coffeeService.getLastId() + 1,

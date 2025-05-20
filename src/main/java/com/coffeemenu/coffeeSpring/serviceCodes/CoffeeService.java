@@ -1,10 +1,10 @@
-package com.coffeemenu.coffeeSpring;
+package com.coffeemenu.coffeeSpring.serviceCodes;
 
+import com.coffeemenu.coffeeSpring.modelCodes.Coffee;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
