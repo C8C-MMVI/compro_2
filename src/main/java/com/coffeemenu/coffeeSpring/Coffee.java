@@ -8,14 +8,20 @@ public class Coffee {
     private int id;
     @NotBlank(message = "Coffee name is required")
     private String name;
+    @NotBlank(message = "Coffee type is required")
     private String type;
+    @NotBlank(message = "Coffee size is required")
     private String size;
+    @NotBlank(message = "Coffee price is required")
     private double price;
+    @NotBlank(message = "Coffee roast level is required")
     private String roastLevel;
     private String origin;
     private boolean isDecaf;
+    @NotBlank(message = "Coffee stock is required")
     private int stock;
     private List<String> flavorNotes;
+    @NotBlank(message = "Coffee brew method is required")
     private String brewMethod;
 
     // Parameterless / Default constructor
