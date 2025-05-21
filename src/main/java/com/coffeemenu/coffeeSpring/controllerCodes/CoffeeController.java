@@ -1,5 +1,6 @@
 package com.coffeemenu.coffeeSpring.controllerCodes;
 
+import com.coffeemenu.coffeeSpring.modelCodes.Coffee;
 import com.coffeemenu.coffeeSpring.serviceCodes.CoffeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,6 @@ public class CoffeeController {
 
     @GetMapping("/new")
     public String createCoffee(Model model){
-        String [] beanType = {"Arabica", "Robusta", "Liberica"};
-        model.addAttribute("beanType", beanType);
-        String [] coffeeRoast = {"Low", "Medium", "High"};
-        model.addAttribute("coffeeRoast", coffeeRoast);
-        String [] coffeeFlavorNotes= {"Strong", "Bitter", "Nutty", "Milky", "Chocolatey"};
-        model.addAttribute("coffeeFlavorNotes", coffeeFlavorNotes);
-        String [] coffeeBrew = {"Drip", "Espresso machine", "Cold Brew", "French Press", "Moka pot"};
-        model.addAttribute("coffeeBrew", coffeeBrew);
         Coffee newCoffee = new Coffee();
         return "new";
     }

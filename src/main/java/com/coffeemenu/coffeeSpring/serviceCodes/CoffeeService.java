@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class CoffeeService {
     private ArrayList<Coffee> coffee;
-    private static final String FILE_NAME = "coffee.csv";
+    private static final String FILE_NAME = "data/coffee.csv";
 
     public CoffeeService(){
         coffee = new ArrayList<>();
@@ -119,8 +119,10 @@ public class CoffeeService {
                         data[1], data[2],
                         data[3], Double.parseDouble(data[4]),
                         data[5], data[6],
-                        Boolean.parseBoolean(data[7]), Integer.parseInt(data[8]),
-                        flavorNotes, data[10]);
+                        Boolean.parseBoolean(data[7]),
+                        Integer.parseInt(data[8]),
+                        flavorNotes,
+                        data[10]);
                 coffee.add(c);
             }
         }catch(IOException e){
