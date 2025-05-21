@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <link th:href="@{/css/loginStyle.css}" rel="stylesheet">
 </head>
 <body>
 
 <div class="login-container">
-    <h1>Login</h1>
     <form action="/login" method="POST" th:object="${user}">
-
+        <h1>COFFEE COFFEE</h1>
+        <h2>Log in</h2>
         <p class="form-error" th:if="${error}" th:text="${error}"></p>
 
         <div>
