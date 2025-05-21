@@ -42,7 +42,7 @@ public class UserIDService {
 
     public void save(UserID appUser) {
         appUser.setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
-        //tod save new user like saving student in the Student Service
+        //to save new user like saving student in the Student Service
     }
 }
 

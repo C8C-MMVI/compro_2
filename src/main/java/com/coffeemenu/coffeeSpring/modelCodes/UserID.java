@@ -3,8 +3,9 @@ package com.coffeemenu.coffeeSpring.modelCodes;
 import jakarta.validation.constraints.NotBlank;
 
 public class UserID {
-    @NotBlank(message = "Username should not be blank")
+    @NotBlank(message = "Username is missing/blank")
     private String username;
+    @NotBlank(message = "Password is missing/blank")
     private String password;
 
     public String getUsername() {

@@ -23,6 +23,7 @@ public class Coffee {
     private List<String> flavorNotes;
     @NotBlank(message = "Coffee brew method is required")
     private String brewMethod;
+    private String coffeeImage;
 
     // Parameterless / Default constructor
     public Coffee(){
@@ -45,7 +46,7 @@ public class Coffee {
 
      */
     public Coffee(int id, String name, String type, String size, double price, String roastLevel,
-                  String origin, boolean isDecaf, int stock, List<String> flavorNotes, String brewMethod) {
+                  String origin, boolean isDecaf, int stock, List<String> flavorNotes, String brewMethod, String coffeeImage) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -57,6 +58,7 @@ public class Coffee {
         this.stock = stock;
         this.flavorNotes = flavorNotes;
         this.brewMethod = brewMethod;
+        this.coffeeImage = coffeeImage;
     }
 
     /**
@@ -74,9 +76,15 @@ public class Coffee {
     public int getStock() { return stock; }
     public List<String> getFlavorNotes() { return flavorNotes; }
     public String getBrewMethod() { return brewMethod; }
+    public String getCoffeeImage() {
+        return coffeeImage;
+    }
 
     public void setId(int id) {this.id = id;}
 
+    /**
+     * Setter is set for searching
+     */
     public void setName(String name) {
        name = name.trim();
 
@@ -108,4 +116,8 @@ public class Coffee {
     public void setFlavorNotes(List<String> flavorNotes) {this.flavorNotes = flavorNotes;}
 
     public void setBrewMethod(String brewMethod) {this.brewMethod = brewMethod;}
+
+    public void setCoffeeImage(String coffeeImage) {
+        this.coffeeImage = coffeeImage;
+    }
 }

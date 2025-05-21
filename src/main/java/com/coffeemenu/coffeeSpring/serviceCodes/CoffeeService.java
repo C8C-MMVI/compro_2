@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class CoffeeService {
     private ArrayList<Coffee> coffee;
-    private static final String FILE_NAME = "coffee.csv";
+    private static final String FILE_NAME = "data/coffee.csv";
 
     public CoffeeService(){
         coffee = new ArrayList<>();
@@ -65,17 +65,11 @@ public class CoffeeService {
         }
     }
     public void addCoffee(Coffee coffees){
-//        coffee.setId(getLastId() + 1);
         coffee.add(coffees);
         writeToDisk();
     }
 
-    public int getLastId(){
-        if(coffee.isEmpty()){
-            return 0;
-        }
-        return coffee.get(coffee.size()-1).getId();
-    }
+    public int getLastId(){return coffee.stream().mapToInt(Coffee::getId).max().orElse(0);}
 
     public void writeToDisk(){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))){
@@ -91,7 +85,8 @@ public class CoffeeService {
                         + c.isDecaf() + ","
                         + c.getStock() + ","
                         + String.join(";", c.getFlavorNotes())+ ","
-                        + c.getBrewMethod()
+                        + c.getBrewMethod() + ","
+                        + (c.getCoffeeImage() != null ? c.getCoffeeImage() : "")
                 );
                 bw.newLine();
             }
@@ -103,30 +98,49 @@ public class CoffeeService {
     /**
      * This read the CSV file and loads it to the students ArrayList
      */
-    public void readFromDisk(){
+    public void readFromDisk() {
         File file = new File(FILE_NAME);
-        if(!file.exists()){
-            System.out.println("File not found");
+        if (!file.exists()) {
+            System.out.println("File cannot be located");
             return;
         }
 
-        try(BufferedReader br = new BufferedReader(new FileReader(file))){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            while((line = br.readLine()) != null){
-                String[] data = line.split(",");
-                List<String> flavorNotes = List.of(data[9].split(";"));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",", -1);
+                if (data.length < 12) {
+                    System.out.println("Line skipped: " + line);
+                    continue;
+                }
 
-                Coffee c = new Coffee(
-                        Integer.parseInt(data[0]),
-                        data[1], data[2],
-                        data[3], Double.parseDouble(data[4]),
-                        data[5], data[6],
-                        Boolean.parseBoolean(data[7]), Integer.parseInt(data[8]),
-                        flavorNotes, data[10]);
-                coffee.add(c);
+                try {
+                    List<String> flavorNotes = List.of(data[9].split(";"));
+
+                    String image = data[11].isEmpty() ? null : data[11];
+
+                    Coffee c = new Coffee(
+                            Integer.parseInt(data[0]),
+                            data[1],
+                            data[2],
+                            data[3],
+                            Double.parseDouble(data[4]),
+                            data[5],
+                            data[6],
+                            Boolean.parseBoolean(data[7]),
+                            Integer.parseInt(data[8]),
+                            flavorNotes,
+                            data[10],
+                            image // Use cleaned value here
+                    );
+                    coffee.add(c);
+                } catch (Exception e) {
+                    System.out.println("Line encountered a parsing error: " + line);
+                    e.printStackTrace();
+                }
             }
-        }catch(IOException e){
-            System.out.println("Error: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("File cannot be read: " + e.getMessage());
         }
     }
 }

@@ -40,7 +40,6 @@ public class AuthenticatorController {
             model.addAttribute("error", error);
         }
 
-
         return "login";
 
     }
