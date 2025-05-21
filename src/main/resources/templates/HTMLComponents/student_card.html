@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="student(student)">
+    <h1 th:text="${student.firstName}"></h1>
+    <h1 th:text="${student.lastName}"></h1>
+    <!-- If student has uploaded a profile picture -->
+    <img th:if="${student.profilePicture != null}"
+         th:src="@{'/' + ${student.profilePicture}}"
+         alt="Profile Picture">
+
+    <!-- If no picture, fallback to default based on gender -->
+    <img th:if="${student.profilePicture == null}"
+         th:src="@{${student.gender == 'Male'} ? '/images/default-male.png' : '/images/default-female.png'}"
+         alt="Default Picture">
+</div>

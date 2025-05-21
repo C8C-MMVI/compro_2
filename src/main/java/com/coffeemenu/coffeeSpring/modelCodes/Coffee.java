@@ -43,7 +43,7 @@ public class Coffee {
      * @param stock       Checks if the coffee is available
      * @param flavorNotes Coffee flavor notes
      * @param brewMethod  How the coffee was brewed
-
+     * @param coffeeImage The needed image/illustration of the coffee
      */
     public Coffee(int id,
                   String name,
@@ -121,6 +121,8 @@ public class Coffee {
 
     public void setOrigin(String origin) {this.origin = origin;}
 
+    public void setDecaf(boolean isDecaf) {this.isDecaf = isDecaf;}
+
     public void setStock(int stock) {this.stock = stock;}
 
     public void setFlavorNotes(List<String> flavorNotes) {this.flavorNotes = flavorNotes;}
@@ -130,4 +132,6 @@ public class Coffee {
     public void setCoffeeImage(String coffeeImage) {
         this.coffeeImage = coffeeImage;
     }
+
+
 }

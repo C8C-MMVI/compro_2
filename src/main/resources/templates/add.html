@@ -6,15 +6,10 @@
   <link th:href="@{/css/formStyle.css}" rel="stylesheet">
 </head>
 <body>
-<header>
-  <div>
-    <h1>COFFEE COFFEE</h1>
-  </div>
-</header>
 <main>
   <h2>New Coffee</h2>
   <div class="add-form">
-    <form th:action="@{/save}" method="POST">
+    <form th:action="@{/save}" enctype="multipart/form-data" method="post" th:object="${coffee}">
       <div>
         <label for="cname">Coffee Name</label>
         <input type="text" id="cname" th:field="*{name}"
@@ -121,9 +116,5 @@
   </div>
 
 </main>
-<footer>
-  <h1>COFFEE COFFEE</h1>
-  <p>All Rights Reserved. Copyright 2025 by Allon-sy Co.</p>
-</footer>
 </body>
 </html>

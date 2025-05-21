@@ -104,20 +104,19 @@ public class CoffeeService {
             System.out.println("File cannot be located");
             return;
         }
-
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",", -1);
                 if (data.length < 12) {
-                    System.out.println("Line skipped: " + line);
+                    System.out.println("Skipping invalid line: " + line);
                     continue;
                 }
 
                 try {
                     List<String> flavorNotes = List.of(data[9].split(";"));
 
-                    String image = data[11].isEmpty() ? null : data[11];
+                    String photograph = data[11].isEmpty() ? null : data[11];
 
                     Coffee c = new Coffee(
                             Integer.parseInt(data[0]),
@@ -131,11 +130,11 @@ public class CoffeeService {
                             Integer.parseInt(data[8]),
                             flavorNotes,
                             data[10],
-                            image // Use cleaned value here
+                            photograph // Use cleaned value here
                     );
                     coffee.add(c);
                 } catch (Exception e) {
-                    System.out.println("Line encountered a parsing error: " + line);
+                    System.out.println("Error parsing line: " + line);
                     e.printStackTrace();
                 }
             }

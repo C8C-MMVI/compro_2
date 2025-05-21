@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AuthenticatorController {
     @Autowired
-    UserIDService appUserService;
+    UserIDService UserIDService;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -31,12 +31,12 @@ public class AuthenticatorController {
         }
 
         //authenticate
-        UserID foundUser = appUserService.findByUsername(formUser.getUsername());
-        if(foundUser != null && new BCryptPasswordEncoder().matches(formUser.getPassword(), foundUser.getPassword())){
-            session.setAttribute("user", foundUser);
+        UserID userFound = UserIDService.findByUsername(formUser.getUsername());
+        if(userFound != null && new BCryptPasswordEncoder().matches(formUser.getPassword(), userFound.getPassword())){
+            session.setAttribute("user", userFound);
             return "redirect:/";
         }else{
-            String error ="Invalid credentials";
+            String error ="Invalid credentials. Try again";
             model.addAttribute("error", error);
         }
 

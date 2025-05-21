@@ -72,7 +72,7 @@ main{
 .options a:hover{
     background-color: white;
     color: #A27B5C;
-    99text-decoration-line: underline;
+    text-decoration-line: underline;
     font-size: 14px;
 }
 .options> #search > form > input{
