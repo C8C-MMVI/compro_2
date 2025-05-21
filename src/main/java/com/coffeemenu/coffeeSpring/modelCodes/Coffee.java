@@ -45,8 +45,18 @@ public class Coffee {
      * @param brewMethod  How the coffee was brewed
 
      */
-    public Coffee(int id, String name, String type, String size, double price, String roastLevel,
-                  String origin, boolean isDecaf, int stock, List<String> flavorNotes, String brewMethod, String coffeeImage) {
+    public Coffee(int id,
+                  String name,
+                  String type,
+                  String size,
+                  double price,
+                  String roastLevel,
+                  String origin,
+                  boolean isDecaf,
+                  int stock,
+                  List<String> flavorNotes,
+                  String brewMethod,
+                  String coffeeImage) {
         this.id = id;
         this.name = name;
         this.type = type;

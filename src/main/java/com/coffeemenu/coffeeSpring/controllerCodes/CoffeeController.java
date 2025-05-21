@@ -9,19 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-//import jakarta.servlet.http.HttpSession;
-//import jakarta.validation.Valid;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.File;
@@ -76,13 +65,13 @@ public class CoffeeController {
     }
 
     @PostMapping("/save")
-    public String saveCoffee(ModelAttribute("coffee") @Valid Coffee coffee,
-    BindingResult bindingResult, @RequestParam("imageFile")
-    MultipartFile coffeePicture,
-    HttpSession session,
-    Model model) {
+    public String saveCoffee(@ModelAttribute("coffee") @Valid Coffee coffee,
+                                BindingResult bindingResult,
+                                @RequestParam("imageFile") MultipartFile coffeeImage,
+                                HttpSession session,
+                                Model model) {
 
-        AppUser currentUser = (AppUser) session.getAttribute("user");
+        UserID currentUser = (UserID) session.getAttribute("user");
         if (currentUser == null) {
             return "redirect:/login";
         }
@@ -91,21 +80,21 @@ public class CoffeeController {
             return "add";
         }
 
-        if (!coffeePicture.isEmpty()) {
+        if (!coffeeImage.isEmpty()) {
             String path = "data/coffee_pictures/";
             File uploadFolder = new File(path);
             if (!uploadFolder.exists()) {
                 uploadFolder.mkdirs();
             }
 
-            String originalFileName = coffeePicture.getOriginalFilename();
+            String originalFileName = coffeeImage.getOriginalFilename();
             String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
             String fileName = UUID.randomUUID() + extension;
 
             try {
                 File destinationFile = new File(uploadFolder.getAbsolutePath() + File.separator + fileName);
-                coffeePicture.transferTo(destinationFile);
-                coffee.setCoffeePicture(fileName);
+                coffeeImage.transferTo(destinationFile);
+                coffee.setCoffeeImage(fileName);
             } catch (IOException e) {
                 System.out.println("File upload error: " + e.getMessage());
             }
