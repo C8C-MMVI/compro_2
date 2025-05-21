@@ -1,4 +1,4 @@
-package com.coffeemenu.coffeeSpring;
+package com.coffeemenu.coffeeSpring.serviceCodes;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.coffeemenu.coffeeSpring;
+package com.coffeemenu.coffeeSpring.modelCodes;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -102,6 +102,8 @@ public class Coffee {
     public void setRoastLevel(String roastLevel) {this.roastLevel = roastLevel;}
 
     public void setOrigin(String origin) {this.origin = origin;}
+
+    public void setDecaf(boolean isDecaf) {this.isDecaf = isDecaf;}
 
     public void setStock(int stock) {this.stock = stock;}
 
