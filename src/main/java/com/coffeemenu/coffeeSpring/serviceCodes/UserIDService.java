@@ -19,7 +19,7 @@ public class UserIDService {
     @PostConstruct
     public void init() throws IOException {
         appUsers = new ArrayList<>();
-        File file = new File("data/users.csv.csv"); // path relative to project root
+        File file = new File("data/users.csv"); // path relative to project root
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
