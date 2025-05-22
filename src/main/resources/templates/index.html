@@ -4,65 +4,68 @@
     <title>Coffee List</title>
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
-    <body>
-    <header>
-        <div>
-            <h1>COFFEE COFFEE</h1>
-        </div>
-    </header>
-    <main>
-        <div class="options">
-            <a href="/new">Add Coffee</a>
-            <div id="search">
-                <form>
-                    <input type="text" name="search" placeholder="Search Coffee">
-                    <button>Search</button>
-                </form>
-            </div>
-        </div>
-        <div class="tableCoffee">
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Size</th>
-                    <th>Price</th>
-                    <th>Roast Level</th>
-                    <th>Origin</th>
-                    <th>Decaf</th>
-                    <th>Stock</th>
-                    <th>Flavor Notes</th>
-                    <th>Brew Method</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="coffee: ${coffees}">
-                    <td th:text = "${coffee.id}"></td>
-                    <td th:text = "${coffee.name}"></td>
-                    <td th:text = "${coffee.type}"></td>
-                    <td th:text = "${coffee.size}"></td>
-                    <td th:text = "${coffee.price}"></td>
-                    <td th:text = "${coffee.roastLevel}"></td>
-                    <td th:text = "${coffee.origin}"></td>
-                    <td th:text = "${coffee.isDecaf}"></td>
-                    <td th:text = "${coffee.stock}"></td>
-                    <td th:text = "${coffee.flavorNotes}"></td>
-                    <td th:text = "${coffee.brewMethod}"></td>
-                    <td class="actions">
-                        <a th:href = "@{/delete(id=${coffee.id})}">Delete</a>
-                        <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-    <footer>
+<body>
+<header>
+    <div>
         <h1>COFFEE COFFEE</h1>
-        <p>All Rights Reserved. Copyright 2025 by Allon-sy Co.</p>
-    </footer>
+    </div>
+</header>
+<main>
+    <div class="options">
+        <a href="/logout" class="button" style="float: right;">Log Out</a>
+        <a href="/new">Add Coffee</a>
+        <div id="search">
+            <form>
+                <input type="text" name="search" placeholder="Search Coffee">
+                <button>Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="tableCoffee">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Roast Level</th>
+                <th>Origin</th>
+                <th>Decaf</th>
+                <th>Stock</th>
+                <th>Flavor Notes</th>
+                <th>Brew Method</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coffee: ${coffees}">
+                <td th:text="${coffee.id}"></td>
+                <td th:text="${coffee.name}"></td>
+                <td th:text="${coffee.type}"></td>
+                <td th:text="${coffee.size}"></td>
+                <td th:text="${coffee.price}"></td>
+                <td th:text="${coffee.roastLevel}"></td>
+                <td th:text="${coffee.origin}"></td>
+                <!-- Display decaf as true/false -->
+                <td th:text="${coffee.decaf}"></td>
+                <td th:text="${coffee.stock}"></td>
+                <!-- Join flavorNotes list as comma-separated string -->
+                <td th:text="${#strings.arrayJoin(coffee.flavorNotes.toArray(), ', ')}"></td>
+                <td th:text="${coffee.brewMethod}"></td>
+                <td class="actions">
+                    <a th:href="@{/delete(id=${coffee.id})}">Delete</a>
+                    <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<footer>
+    <h1>COFFEE COFFEE</h1>
+    <p>All Rights Reserved. Copyright 2025 by Allon-sy Co.</p>
+</footer>
 </body>
 </html>

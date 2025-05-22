@@ -1,49 +1,32 @@
 package com.coffeemenu.coffeeSpring.modelCodes;
 
-import jakarta.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.*;
 import java.util.List;
 
 public class Coffee {
     private int id;
+
     @NotBlank(message = "Coffee name is required")
-    private String name; //min=2; max=50
+    @Size(min = 2, max = 50, message = "Name must be between 2 to 50 characters")
+    private String name;
     @NotBlank(message = "Select a coffee bean type")
     private String type;
     @NotBlank(message = "Coffee size is required")
     private String size;
-    @NotBlank(message = "Coffee price is needed")
+    @Positive(message = "Coffee price must be greater than 0")
     private double price;
     @NotBlank(message = "Coffee bean roast level is needed")
     private String roastLevel;
     private String origin;
     private boolean isDecaf;
-    @NotBlank(message = "No. of stock is needed")
-    private int stock; //min=0
+    @Min(value = 0, message = "Stock must be 0 or more")
+    private int stock;
     private List<String> flavorNotes;
     @NotBlank(message = "Brew method is needed")
     private String brewMethod;
 
-    // Parameterless / Default constructor
-    public Coffee(){
+    public Coffee() {}
 
-    }
-    /**
-     * Constructor for coffee data
-     *
-     * @param id          ID no.
-     * @param name        Coffee name
-     * @param type        Coffee bean type
-     * @param size        Coffee cup size
-     * @param price       Coffee price
-     * @param roastLevel  Type of coffee bean roast
-     * @param origin      Coffee bean origin
-     * @param isDecaf     Tells whether the coffee is decaf or not
-     * @param stock       Checks if the coffee is available
-     * @param flavorNotes Coffee flavor notes
-     * @param brewMethod  How the coffee was brewed
-
-     */
     public Coffee(int id, String name, String type, String size, double price, String roastLevel,
                   String origin, boolean isDecaf, int stock, List<String> flavorNotes, String brewMethod) {
         this.id = id;
@@ -59,10 +42,6 @@ public class Coffee {
         this.brewMethod = brewMethod;
     }
 
-    /**
-     * Object encapsulation
-     * @return the following in the Constructor
-     */
     public int getId() { return id; }
     public String getName() { return name; }
     public String getType() { return type; }
@@ -75,39 +54,30 @@ public class Coffee {
     public List<String> getFlavorNotes() { return flavorNotes; }
     public String getBrewMethod() { return brewMethod; }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(int id) { this.id = id; }
 
     public void setName(String name) {
-       name = name.trim();
-
-       String[] names = name.split("\\s");
-       this.name="";
-
-       for(String coffeeName : names ){
-           if(!this.name.isEmpty())
-               this.name += " ";
-           if(name.length() > 2)
-               this.name += coffeeName.substring(0,1).toUpperCase() +
-                       coffeeName.substring(1, coffeeName.length());
-           else
-               this.name += coffeeName.toUpperCase();
-       }
+        name = name.trim();
+        String[] words = name.split("\\s+");
+        StringBuilder formatted = new StringBuilder();
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                if (word.length() > 2)
+                    formatted.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1).toLowerCase()).append(" ");
+                else
+                    formatted.append(word.toUpperCase()).append(" ");
+            }
+        }
+        this.name = formatted.toString().trim();
     }
-    public void setType(String type) {this.type = type;}
 
-    public void setSize(String size) {this.size = size;}
-
-    public void setPrice(double price) {this.price = price;}
-
-    public void setRoastLevel(String roastLevel) {this.roastLevel = roastLevel;}
-
-    public void setOrigin(String origin) {this.origin = origin;}
-
-    public void setDecaf(boolean isDecaf) {this.isDecaf = isDecaf;}
-
-    public void setStock(int stock) {this.stock = stock;}
-
-    public void setFlavorNotes(List<String> flavorNotes) {this.flavorNotes = flavorNotes;}
-
-    public void setBrewMethod(String brewMethod) {this.brewMethod = brewMethod;}
+    public void setType(String type) { this.type = type; }
+    public void setSize(String size) { this.size = size; }
+    public void setPrice(double price) { this.price = price; }
+    public void setRoastLevel(String roastLevel) { this.roastLevel = roastLevel; }
+    public void setOrigin(String origin) { this.origin = origin; }
+    public void setDecaf(boolean isDecaf) { this.isDecaf = isDecaf; }
+    public void setStock(int stock) { this.stock = stock; }
+    public void setFlavorNotes(List<String> flavorNotes) { this.flavorNotes = flavorNotes; }
+    public void setBrewMethod(String brewMethod) { this.brewMethod = brewMethod; }
 }

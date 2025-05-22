@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Login</title>
+  <link th:href="@{/css/loginStyle.css}" rel="stylesheet">
 </head>
 <body>
+
+<div class="login-box">
+  <form action="/login" method="POST" th:object="${user}">
+    <h1>COFFEE COFFEE</h1>
+    <h2>Log in</h2>
+    <p class="form-error" th:if="${error}" th:text="${error}"></p>
+    <div>
+      <label for="username">User Name</label>
+      <input type="text" th:field="*{username}" id="username" />
+      <p class="form-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input type="password" th:field="*{password}" id="password" />
+      <p class="form-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
 
 </body>
 </html>

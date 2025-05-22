@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Coffee</title>
+  <link th:href="@{/css/formStyle.css}" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --logoFont: "Special Gothic Expanded One", sans-serif;
+    --baseFont: "Montserrat", sans-serif;
+    --primaryColor: #3F4F44;
+    --secondaryColor:#2C3930;
+    /* Accent Colors */
+    --boldColor: #FFF0DC;
+    --lightFontColor: #543A14;
+    --borderColor:5px solid #A27B5C;
+    --borderColorOnly: #A27B5C;
+    --delete: #E07B39;
+    --edit:#F0BB78;
+    --error: #FE4F2D;
+    --borderRadius: 5px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: var(--boldColor);
+    font-family: var(--coffeeFont);
+    background-color: #A27B5C;
+    font-size: 32px;
+    letter-spacing: 5px;
+    text-align: center;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #DCD7C9;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    color: var(--lightFontColor);
+    border-top: var(--borderColor);
+    border-left: var(--borderColor);
+}
+
+.form-container form > div {
+    margin-bottom: 15px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: var(--baseFont);
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container select {
+    width: 100%;
+    padding: 6px 8px;
+    font-family: var(--baseFont);
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #A27B5C;
+}
+
+.form-container input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.form-container .flavor-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px 12px;
+}
+
+.form-container .flavor-group label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.form-container .error {
+    color: var(--color-error);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+input.error,
+select.error {
+    border: 2px solid var(--color-error);
+    background-color: #ffeae6;
+}
+
+.action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.action button,
+.action a.button {
+    font-size: 14px;
+    padding: 8px 20px;
+    font-family: var(--baseFont);
+    font-weight: bold;
+    background-color: #A27B5C;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.action button:hover,
+.action a.button:hover {
+    background-color: white;
+    color: #A27B5C;
+    text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>
+<div class="form-container">
+  <h1>Add New Coffee</h1>
+  <form th:action="@{/save}" method="post" th:object="${coffee}">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" th:field="*{name}" autofocus
+             th:classappend="${#fields.hasErrors('name')} ? 'error' : ''">
+      <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    </div>
+
+    <div>
+      <label for="type">Type</label>
+      <select id="type" th:field="*{type}"
+              th:classappend="${#fields.hasErrors('type')} ? 'error' : ''">
+        <option value="" selected>Select a type</option>
+        <option value="Arabica">Arabica</option>
+        <option value="Robusta">Robusta</option>
+      </select>
+      <p class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
+    </div>
+
+    <div>
+      <label for="size">Size</label>
+      <select id="size" th:field="*{size}"
+              th:classappend="${#fields.hasErrors('size')} ? 'error' : ''">
+        <option value="" selected>Select size</option>
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+      </select>
+      <p class="error" th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></p>
+    </div>
+
+    <div>
+      <label for="price">Price</label>
+      <input type="number" id="price" step="0.01" th:field="*{price}"
+             th:classappend="${#fields.hasErrors('price')} ? 'error' : ''">
+      <p class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+    </div>
+
+    <div>
+      <label for="roastLevel">Roast Level</label>
+      <select id="roastLevel" th:field="*{roastLevel}"
+              th:classappend="${#fields.hasErrors('roastLevel')} ? 'error' : ''">
+        <option value="">Select a roast level</option>
+        <option value="Light">Light</option>
+        <option value="Medium">Medium</option>
+        <option value="Dark">Dark</option>
+      </select>
+      <p class="error" th:if="${#fields.hasErrors('roastLevel')}" th:errors="*{roastLevel}"></p>
+    </div>
+
+    <div>
+      <label for="origin">Origin</label>
+      <input type="text" id="origin" th:field="*{origin}" maxlength="100">
+    </div>
+
+    <div>
+      <label for="stock">Stock</label>
+      <input type="number" id="stock" th:field="*{stock}"
+             th:classappend="${#fields.hasErrors('stock')} ? 'error' : ''">
+      <p class="error" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></p>
+    </div>
+
+    <div>
+      <label for="decaf">Decaf</label>
+      <input type="checkbox" id="decaf" th:field="*{decaf}">
+    </div>
+
+    <div>
+      <label>Flavor Notes:</label>
+      <div class="flavor-group">
+        <label><span>Chocolate</span><input type="checkbox" th:field="*{flavorNotes}" value="Chocolate"></label>
+        <label><span>Citrus</span><input type="checkbox" th:field="*{flavorNotes}" value="Citrus"></label>
+        <label><span>Earthy</span><input type="checkbox" th:field="*{flavorNotes}" value="Earthy"></label>
+        <label><span>Floral</span><input type="checkbox" th:field="*{flavorNotes}" value="Floral"></label>
+        <label><span>Fruity</span><input type="checkbox" th:field="*{flavorNotes}" value="Fruity"></label>
+        <label><span>Nutty</span><input type="checkbox" th:field="*{flavorNotes}" value="Nutty"></label>
+        <label><span>Strong</span><input type="checkbox" th:field="*{flavorNotes}" value="Strong"></label>
+        <label><span>Spicy</span><input type="checkbox" th:field="*{flavorNotes}" value="Spicy"></label>
+      </div>
+    </div>
+
+    <div>
+      <label for="brewMethod">Brew Method</label>
+      <select id="brewMethod" th:field="*{brewMethod}"
+              th:classappend="${#fields.hasErrors('brewMethod')} ? 'error' : ''">
+        <option value="">Select a method</option>
+        <option value="Drip">Drip</option>
+        <option value="French Press">French Press</option>
+        <option value="Espresso">Espresso</option>
+      </select>
+      <p class="error" th:if="${#fields.hasErrors('brewMethod')}" th:errors="*{brewMethod}"></p>
+    </div>
+
+    <div class="action">
+      <button type="submit">Add Coffee</button>
+      <a th:href="@{/}" class="button cancel">Cancel</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

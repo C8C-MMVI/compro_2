@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CoffeeController {
@@ -26,21 +23,21 @@ public class CoffeeController {
 
     @GetMapping("/delete")
     public String deleteCoffee(@RequestParam int id) {
-        coffeeService.deleteCoffee(id); // Lets the user delete any of the coffee options
+        coffeeService.deleteCoffee(id);
         return "redirect:/";
     }
 
     @GetMapping("/new")
-    public String createCoffee(Model model){
-        Coffee newCoffee = new Coffee();
-        return "new";
+    public String createCoffee(Model model) {
+        model.addAttribute("coffee", new Coffee()); // Corrected: add the model attribute
+        return "addCoffee";
     }
 
     @PostMapping("/save")
-    public String saveCoffee(@ModelAttribute("newCoffee") @Valid Coffee coffee, BindingResult bindingResult){
-        if(bindingResult.hasErrors()) {
-
-            return "create";
+    public String saveCoffee(@ModelAttribute("coffee") @Valid Coffee coffee,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "addCoffee"; // Return to form if validation fails
         }
         coffeeService.addCoffee(coffee);
         return "redirect:/";
@@ -49,28 +46,20 @@ public class CoffeeController {
     @GetMapping("/edit")
     public String editCoffee(@RequestParam int id, Model model) {
         Coffee c = coffeeService.getCoffee(id);
-        return "redirect:/";
+        if (c != null) {
+            model.addAttribute("coffee", c); // Corrected: provide coffee for editing
+            return "editCoffee";
+        }
+        return "redirect:/"; // fallback
     }
 
     @PostMapping("/update")
-    public String store(@ModelAttribute("coffee") @Valid Coffee coffee, BindingResult bindingResult, Model model) {
+    public String store(@ModelAttribute("coffee") @Valid Coffee coffee,
+                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            String [] beanType = {"Arabica", "Robusta", "Liberica"};
-            model.addAttribute("beanType", beanType);
-            String [] coffeeRoast = {"Low", "Medium", "High"};
-            model.addAttribute("coffeeRoast", coffeeRoast);
-            String [] coffeeFlavorNotes= {"Strong", "Bitter", "Nutty", "Milky", "Chocolatey"};
-            model.addAttribute("coffeeFlavorNotes", coffeeFlavorNotes);
-            String [] coffeeBrew = {"Drip", "Espresso machine", "Cold Brew", "French Press", "Moka pot"};
-            model.addAttribute("coffeeBrew", coffeeBrew);
-            System.out.println(bindingResult.getAllErrors());
-            return "edit";
+            return "editCoffee";
         }
-
-        Coffee existingCoffee= coffeeService.getCoffee(coffee.getId());
-        if(existingCoffee != null){
-            coffeeService.updateCoffee(coffee.getId(), coffee);
-        }
+        coffeeService.updateCoffee(coffee.getId(), coffee);
         return "redirect:/";
     }
 }

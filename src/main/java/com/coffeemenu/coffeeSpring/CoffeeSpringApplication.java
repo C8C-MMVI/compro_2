@@ -15,6 +15,7 @@ public class CoffeeSpringApplication {
 	public static void run(){
 		String plainPassword = "CoffeeToAll";
 		String hash = new BCryptPasswordEncoder().encode(plainPassword);
-		System.out.println(hash);
+		System.out.println("User password (if you forgot): " + plainPassword);
+		System.out.println("Hash password: " + hash);
 	}
 }

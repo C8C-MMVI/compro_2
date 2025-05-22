@@ -1,148 +1,122 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
+:root {
     --boldColor: #FFF0DC;
     --coffeeFont: "Special Gothic Expanded One", sans-serif;
     --baseFont: "Montserrat", sans-serif;
     --lightFontColor: #543A14;
-    --borderColor:5px solid #A27B5C;
-    --color-error: #E83F25;
+    --borderColor: 5px solid #A27B5C;
+    --color-error: #FE4F2D;
 }
 
-html, body {
+*{
     margin: 0;
     padding: 0;
-    background: #3F4F44;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    box-sizing: border-box;
 }
 
-header{
-    margin: 0;
-    padding: 10px 15px;
-    background-color: #2C3930;
-}
-
-h1{
+h1 {
     color: var(--boldColor);
     font-family: var(--coffeeFont);
+    background-color: #A27B5C;
     font-size: 32px;
     letter-spacing: 5px;
-}
-
-main{
-    flex: 1;
-}
-
-main > h2{
     text-align: center;
-    font-family: var(--baseFont);
-    color: beige;
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
-.add-form{
+.form-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     background-color: #DCD7C9;
-    width: 340px;
-    margin: 0 auto 40px;
-    padding: 20px;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
     border-radius: 10px;
     color: var(--lightFontColor);
-    font-family: var(--baseFont);
     border-top: var(--borderColor);
     border-left: var(--borderColor);
 }
 
-.add-form  form > div{
+.form-container form > div {
+    margin-bottom: 15px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container select {
+    width: 100%;
+    padding: 6px 8px;
+    font-family: var(--baseFont);
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #A27B5C;
+}
+
+.form-container input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.form-container .flavor-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px 12px;
+}
+
+.form-container .flavor-group label {
     display: flex;
-    font-family: var(--baseFont);
     align-items: center;
-    margin-bottom: 8px;
-}
-
-.add-form label {
-    width: 130px;
-    font-size: 16px;
-}
-
-.add-form input, .add-form select{
-    flex: 1;
-    padding: 4px;
-    font-family: var(--baseFont);
     font-size: 14px;
 }
 
-#formActions{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 10px;
+.form-container .error {
+    color: var(--color-error);
+    font-size: 13px;
+    margin-top: 4px;
 }
 
-#formActions button{
-    font-size: 14px;
-    margin-top: 15px;
-    background-color: #A27B5C;
-    font-family: var(--baseFont);
-    font-weight: bold;
-    color: white;
-    border-radius: 5px;
-    padding: 3px 14%;
-    border: none;
+input.error,
+select.error {
+    border: 2px solid var(--color-error);
+    background-color: #ffeae6;
 }
 
-#formActions button:hover{
-    background-color: white;
-    color: #A27B5C;
-    text-decoration: underline;
-}
-
-#formActions a{
-    margin-top: 5px;
-    padding: 3px 20px;
-    text-decoration: none;
-    font-family: var(--baseFont);
-    font-weight: bold;
-    background-color: #A27B5C;
-    color: white;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-#formActions a:hover{
-    background-color: white;
-    color: #A27B5C;
-    text-decoration: underline;
-}
-
-footer{
-    background-color: #2C3930;
-    color: var(--boldColor);
-    font-family: var(--baseFont);
-    font-weight: bold;
-    padding: 10px 20px;
+.action {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
 }
 
-.error {
-    color: var(--color-error);
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
-footer > h1 {
-    font-family: var(--coffeeFont);
-    font-size: 20px;
-    margin: 0;
-}
-
-footer > p {
-    margin: 0;
+.action button,
+.action a.button {
     font-size: 14px;
+    padding: 8px 20px;
+    font-family: var(--baseFont);
+    font-weight: bold;
+    background-color: #A27B5C;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.action button:hover,
+.action a.button:hover {
+    background-color: white;
+    color: #A27B5C;
+    text-decoration: underline;
 }
