@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="html(content, docTitle, customCss)">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:replace="${docTitle}">Responsive Dashboard</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:replace="${customCss}" />
 </head>
 <body>
+<aside>
+    <div class="above">
+        <div class="text-brand">
+            <span>Coffee Coffee</span>
+        </div>
+        <div class="menu">
+            <ul>
+                <li th:replace="~{components/menu_item :: menuItem('/', 'Home', ~{components/icons :: dashboardIcon}, ${activeMenu == 'home' ? 'active': ''})}"></li>
+                <li th:replace="~{components/menu_item :: menuItem('/add', 'Add Coffee', ~{components/icons :: coffeeIcon}, ${activeMenu == 'addCoffee' ? 'active': ''})}"></li>
+                <li th:replace="~{components/menu_item :: menuItem('/catalog', 'Catalog', ~{components/icons :: catalogIcon}, ${activeMenu == 'coffeeCatalog' ? 'active' : ''})}"></li>
+                <li th:replace="~{components/menu_item :: menuItem('/logout', 'Logout', ~{components/icons :: logoutIcon}, ${activeMenu == 'logout' ? 'active': ''})}"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="user-profile">
+        <img src="/images/profile.jpg" alt="User's Profile" />
+        <div>
+            <p>Raiven Christian Navor</p>
+            <span>System UI Designer</span>
+        </div>
+    </div>
+</aside>
+
+<main th:replace="${content}"></main>
 
 </body>
 </html>

@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: html(
+          content=~{::main},
+          docTitle=~{::title},
+          customCss=~{::link}
+      )}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +14,7 @@
 <body>
 <div class="form-container">
   <h2>Add New Coffee</h2>
-  <form th:action="@{/save}" method="post" th:object="${coffee}">
+  <form th:action="@{/save}" method="post" th:object="${coffee}" enctype="multipart/form-data">
     <div>
       <label for="name">Name</label>
       <input type="text" id="name" th:field="*{name}" autofocus
@@ -106,7 +111,6 @@
     <div>
       <label for="profile">Coffee Picture</label>
       <input type="file" id="profile" name="imageFile" />
-      <p class="error" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
     </div>
 
     <div class="action">

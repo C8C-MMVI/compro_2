@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: html(
+        content=~{::main},
+        docTitle=~{::title},
+        customCss=~{::link}
+      )}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Catalog</title>
+    <link th:href="@{/css/styleCatalog.css}" rel="stylesheet">
 </head>
 <body>
-
+<main>
+    <!-- Flex container for coffee cards -->
+    <div class="coffee-container">
+        <div th:each="coffee : ${coffees}">
+            <div th:replace="~{components/coffee_card :: coffeeCard(coffees=${coffee})}"></div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

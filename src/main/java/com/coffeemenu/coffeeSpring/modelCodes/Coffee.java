@@ -23,7 +23,6 @@ public class Coffee {
     private List<String> flavorNotes;
     @NotBlank(message = "Brew method is needed")
     private String brewMethod;
-    @NotNull(message = "Image needed")
     private String picture;
 
     public Coffee() {}

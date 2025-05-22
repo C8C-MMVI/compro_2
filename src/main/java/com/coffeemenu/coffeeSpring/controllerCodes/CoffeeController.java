@@ -19,8 +19,12 @@ import java.util.UUID;
 @Controller
 public class CoffeeController {
 
+    private final CoffeeService coffeeService;
+
     @Autowired
-    CoffeeService coffeeService;
+    public CoffeeController(CoffeeService coffeeService) {
+        this.coffeeService = coffeeService;
+    }
 
     @GetMapping("/catalog")
     public String catalog(Model model){

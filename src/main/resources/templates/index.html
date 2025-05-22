@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: html(
+          content=~{::main},
+          docTitle=~{::title},
+          customCss=~{::link}
+      )}">
 <head>
     <title>Coffee List</title>
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
-<header>
-    <div>
-        <h1>COFFEE COFFEE</h1>
-    </div>
-</header>
+
 <main>
     <div class="options">
         <a href="/logout" class="button" style="float: right;">Log Out</a>
@@ -64,9 +65,6 @@
         </table>
     </div>
 </main>
-<footer>
-    <h1>COFFEE COFFEE</h1>
-    <p>All Rights Reserved. Copyright 2025 by Allon-sy Co.</p>
-</footer>
+
 </body>
 </html>
