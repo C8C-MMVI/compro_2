@@ -106,6 +106,7 @@
     <div>
       <label for="profile">Coffee Picture</label>
       <input type="file" id="profile" name="imageFile" />
+      <p class="error" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
     </div>
 
     <div class="action">

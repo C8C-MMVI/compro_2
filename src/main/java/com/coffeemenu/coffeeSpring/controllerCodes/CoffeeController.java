@@ -29,6 +29,11 @@ public class CoffeeController {
         return "coffeeCatalog";
     }
 
+    @GetMapping("/home")
+    public String home(Model model) {
+        return "layouts/master";
+    }
+
     @GetMapping("/")
     public String index(@RequestParam(defaultValue = "") String search, Model model, HttpSession session) {
         UserID currentUser = (UserID) session.getAttribute("user");
@@ -45,13 +50,15 @@ public class CoffeeController {
         return "redirect:/";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/new") // or /add
     public String createCoffee(Model model, HttpSession session) {
         UserID currentUser = (UserID) session.getAttribute("user");
         if (currentUser == null) {
             return "redirect:/login";
         }
+
         model.addAttribute("coffee", new Coffee());
+        model.addAttribute("activeMenu", "add");
         return "addCoffee";
     }
 
@@ -59,8 +66,7 @@ public class CoffeeController {
     public String saveCoffee(@ModelAttribute("coffee") @Valid Coffee coffee,
                              BindingResult bindingResult,
                              @RequestParam("imageFile") MultipartFile picture,
-                             HttpSession session,
-                             Model model) {
+                             HttpSession session) {
 
         UserID currentUser = (UserID) session.getAttribute("user");
         if (currentUser == null) {
@@ -72,7 +78,7 @@ public class CoffeeController {
         }
 
         if (!picture.isEmpty()) {
-            String path = "data/coffee_pictures/";
+            String path = "data/coffee_pics/";
             File uploadFolder = new File(path);
             if (!uploadFolder.exists()) {
                 uploadFolder.mkdirs();
@@ -91,7 +97,6 @@ public class CoffeeController {
             }
         }
 
-        // Let CoffeeService handle ID assignment
         coffeeService.addCoffee(coffee);
         return "redirect:/";
     }
@@ -107,7 +112,7 @@ public class CoffeeController {
         if (c != null) {
             model.addAttribute("coffee", c);
             model.addAttribute("activeMenu", "edit");
-            return "edit";
+            return "editCoffee";
         }
         return "redirect:/";
     }
@@ -115,31 +120,31 @@ public class CoffeeController {
     @PostMapping("/update")
     public String updateCoffee(@ModelAttribute("coffee") @Valid Coffee coffee,
                                BindingResult bindingResult,
-                               @RequestParam("imageFile") MultipartFile coffeePicture,
+                               @RequestParam("imageFile") MultipartFile picture,
                                Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("coffee", coffee);
-            return "edit";
+            return "editCoffee";
         }
 
         Coffee existingCoffee = coffeeService.getCoffee(coffee.getId());
         if (existingCoffee != null) {
 
-            if (!coffeePicture.isEmpty()) {
-                String path = "data/coffee_pictures/";
+            if (!picture.isEmpty()) {
+                String path = "data/coffee_pics/";
                 File uploadFolder = new File(path);
                 if (!uploadFolder.exists()) {
                     uploadFolder.mkdirs();
                 }
 
-                String originalFileName = coffeePicture.getOriginalFilename();
+                String originalFileName = picture.getOriginalFilename();
                 String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
                 String fileName = UUID.randomUUID() + extension;
 
                 try {
                     File destinationFile = new File(uploadFolder.getAbsolutePath() + File.separator + fileName);
-                    coffeePicture.transferTo(destinationFile);
+                    picture.transferTo(destinationFile);
                     coffee.setPicture(fileName);
                 } catch (IOException e) {
                     System.out.println("File upload error: " + e.getMessage());
@@ -152,5 +157,21 @@ public class CoffeeController {
         }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/coffee/view")
+    public String viewCoffee(@RequestParam int id, Model model, HttpSession session) {
+        UserID currentUser = (UserID) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
+        Coffee coffee = coffeeService.getCoffee(id);
+        if (coffee == null) {
+            return "redirect:/";
+        }
+
+        model.addAttribute("coffee", coffee);
+        return "coffee";
     }
 }
