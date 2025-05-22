@@ -6,9 +6,7 @@
   <div class="coffee-grid">
     <div class="coffee-card" th:each="coffee : ${coffees}">
 
-      <img class="profile-img"
-           th:src="@{${coffee.coffeePicture != null} ? '/' + ${coffee.coffeePicture} : '/images/default-coffee.png'}"
-           alt="Coffee Image">
+      <img class="profile-img" th:src="${coffee.picture}}" alt="Coffee Image">
 
       <div class="coffee-card-body">
         <h2 class="coffee-name" th:text="${coffee.name}">Coffee Name</h2>

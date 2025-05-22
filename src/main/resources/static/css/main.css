@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,28 +10,42 @@
 :root {
     --logoFont: "Special Gothic Expanded One", sans-serif;
     --baseFont: "Montserrat", sans-serif;
+
+    /* Primary Theme */
     --primaryColor: #3F4F44;
-    --secondaryColor:#2C3930;
-    /* Accent Colors */
+    --secondaryColor: #2C3930;
+    --tertiaryColor: #F5F2EC;
+
+    /* Font Colors */
     --boldColor: #FFF0DC;
     --lightFontColor: #543A14;
-    --borderColor:5px solid #A27B5C;
-    --borderColorOnly: #A27B5C;
-    --delete: #E07B39;
-    --edit:#F0BB78;
-    --error: #FE4F2D;
+    --menuTextColor: #CFC6B8;
+
+    /* Accent and Feedback */
+    --accentColor: #A27B5C;
     --hoverColor: #EAE4D5;
+    --error: #FE4F2D;
+    --edit: #F0BB78;
+    --delete: #E07B39;
+
+    --border: 5px solid #A27B5C;
     --borderRadius: 5px;
+
+    /* Menu Behavior */
+    --menuActiveBg: #FFF0DC;
+    --menuActiveText: #3F4F44;
+    --menuHoverBg: #EAE4D5;
 }
 
 /* Body Layout */
 body {
-    background-color: var(--primaryColor)
+    background-color: var(--primaryColor);
     display: grid;
     grid-template-columns: 310px 1fr;
     grid-template-areas: "sidebar main";
     height: 100vh;
     width: 100vw;
+    font-family: var(--baseFont);
     transition: all 0.5s ease;
 }
 
@@ -53,7 +67,8 @@ aside {
     gap: 8px;
 }
 
-.brand span {
+.text-brand span {
+    font-family: var(--logoFont);
     font-weight: 600;
     font-size: 26px;
     color: var(--boldColor);
@@ -64,17 +79,16 @@ aside {
     list-style-type: none;
 }
 
-.menu > ul  li {
-    color: var(--baseFont);
+.menu > ul li {
     padding: 11px;
     display: flex;
-    align-content: center;
-    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--borderRadius);
     transition: background-color 0.2s ease;
     margin-bottom: 7px;
     cursor: pointer;
-    justify-content: center;
-    text-align: center;
+    color: var(--boldColor);
 }
 
 .menu > ul > li svg {
@@ -87,23 +101,30 @@ aside {
     flex-grow: 1;
 }
 
+/* Hover */
 .menu > ul > li:hover {
-    background-color: var(--menu-hover);
-    color: var(--hoverColor);
+    background-color: var(--menuHoverBg);
+    color: var(--primaryColor);
 }
 
 .menu > ul > li:hover > svg > * {
-    stroke: var(--hoverColor);
+    stroke: var(--primaryColor);
 }
 
+/* Active Menu */
 .menu > ul > li.active {
-    background-color: var(--accent);
-    color: var(--primary);
+    background-color: var(--menuActiveBg);
+    color: var(--menuActiveText);
 }
 
 .menu > ul > li.active > svg > * {
-    stroke: var(--primary);
+    stroke: var(--menuActiveText);
 }
+
+.menu > ul > li:hover > svg > * {
+    stroke: #000000; /* Force stroke color to black for better contrast */
+}
+
 
 /* User Profile */
 .user-profile {
@@ -116,14 +137,13 @@ aside {
     font-size: 16px;
     font-weight: 500;
     line-height: 14px;
-    color: var(--primary);
+    color: var(--boldColor);
     margin-bottom: 5px;
 }
 
 .user-profile span {
     font-size: 12px;
-    color: var(--menu-text);
-    display: flex;
+    color: var(--menuTextColor);
 }
 
 .user-profile img {
@@ -132,46 +152,26 @@ aside {
     border-radius: 50%;
 }
 
-
 /* Main Content */
 main {
     grid-area: main;
-    background-color: var(--tertiary);
+    background-color: var(--tertiaryColor);
     padding: 71px;
     overflow-y: auto;
 }
 
-/* Responsive: Tablet & below */
-@media (max-width: 48em) {
-    body {
-        grid-template-columns: 102px 1fr;
-    }
 
-    .brand span,
-    .menu > ul > li > span,
-    .user-profile > div {
-        display: none;
-    }
-
-    svg {
-        margin-right: 0;
-        width: 24px;
-        height: 24px;
-        padding: 0;
-        flex-grow: 1;
-        overflow: visible;
-    }
-}
+/* Responsive: Tablet & Below */
 @media (max-width: 768px) {
     body {
-        grid-template-columns: 80px 1fr; /* narrower sidebar */
+        grid-template-columns: 100px 1fr;
     }
 
     aside {
         padding: 24px 12px;
     }
 
-    .brand span,
+    .text-brand span,
     .menu > ul > li > span,
     .user-profile > div {
         display: none;
@@ -184,6 +184,8 @@ main {
 
     svg {
         margin-right: 0;
+        width: 24px;
+        height: 24px;
+        flex-grow: 1;
     }
 }
-
