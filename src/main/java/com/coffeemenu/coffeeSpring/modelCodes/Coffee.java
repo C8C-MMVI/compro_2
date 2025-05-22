@@ -7,7 +7,6 @@ public class Coffee {
     private int id;
 
     @NotBlank(message = "Coffee name is required")
-    @Size(min = 2, max = 50, message = "Name must be between 2 to 50 characters")
     private String name;
     @NotBlank(message = "Select a coffee bean type")
     private String type;
@@ -24,11 +23,14 @@ public class Coffee {
     private List<String> flavorNotes;
     @NotBlank(message = "Brew method is needed")
     private String brewMethod;
+    private String picture;
 
     public Coffee() {}
 
-    public Coffee(int id, String name, String type, String size, double price, String roastLevel,
-                  String origin, boolean isDecaf, int stock, List<String> flavorNotes, String brewMethod) {
+    public Coffee(int id, String name, String type, String size,
+                  double price, String roastLevel, String origin,
+                  boolean isDecaf, int stock, List<String> flavorNotes,
+                  String brewMethod, String picture) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -40,6 +42,7 @@ public class Coffee {
         this.stock = stock;
         this.flavorNotes = flavorNotes;
         this.brewMethod = brewMethod;
+        this.picture = picture;
     }
 
     public int getId() { return id; }
@@ -53,6 +56,7 @@ public class Coffee {
     public int getStock() { return stock; }
     public List<String> getFlavorNotes() { return flavorNotes; }
     public String getBrewMethod() { return brewMethod; }
+    public String getPicture() {return picture;}
 
     public void setId(int id) { this.id = id; }
 
@@ -80,4 +84,5 @@ public class Coffee {
     public void setStock(int stock) { this.stock = stock; }
     public void setFlavorNotes(List<String> flavorNotes) { this.flavorNotes = flavorNotes; }
     public void setBrewMethod(String brewMethod) { this.brewMethod = brewMethod; }
+    public void setPicture(String picture) {this.picture = picture;}
 }

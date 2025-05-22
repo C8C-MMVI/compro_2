@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<li th:fragment="menuItem(url, label, icon, class)" th:data-url="${url}" th:classappend="${class}">
+    <span th:replace="${icon}"></span>
+    <span th:text="${label}"></span>
+</li>
+</body>
+</html>

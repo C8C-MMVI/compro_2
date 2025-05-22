@@ -4,133 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Edit Coffee</title>
-  <link th:href="@{css/formStyle.css}" rel="stylesheet" />
+  <link th:href="@{/css/formStyle.css}" rel="stylesheet" />
 </head>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-:root {
-    --boldColor: #FFF0DC;
-    --coffeeFont: "Special Gothic Expanded One", sans-serif;
-    --baseFont: "Montserrat", sans-serif;
-    --lightFontColor: #543A14;
-    --borderColor: 5px solid #A27B5C;
-    --color-error: #FE4F2D;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    background: #3F4F44;
-    height: 100%;
-    font-family: var(--baseFont);
-}
-
-h1 {
-    color: var(--boldColor);
-    font-family: var(--coffeeFont);
-    background-color: #A27B5C;
-    font-size: 32px;
-    letter-spacing: 5px;
-    text-align: center;
-    margin-top: 5px;
-    border-radius: 5px;
-}
-
-.form-container {
-    background-color: #DCD7C9;
-    max-width: 500px;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 10px;
-    color: var(--lightFontColor);
-    border-top: var(--borderColor);
-    border-left: var(--borderColor);
-}
-
-.form-container form > div {
-    margin-bottom: 15px;
-}
-
-.form-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-container input[type="text"],
-.form-container input[type="number"],
-.form-container select {
-    width: 100%;
-    padding: 6px 8px;
-    font-family: var(--baseFont);
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #A27B5C;
-}
-
-.form-container input[type="checkbox"] {
-    margin-right: 8px;
-}
-
-.form-container .flavor-group {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px 12px;
-}
-
-.form-container .flavor-group label {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-}
-
-.form-container .error {
-    color: var(--color-error);
-    font-size: 13px;
-    margin-top: 4px;
-}
-
-input.error,
-select.error {
-    border: 2px solid var(--color-error);
-    background-color: #ffeae6;
-}
-
-.action {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.action button,
-.action a.button {
-    font-size: 14px;
-    padding: 8px 20px;
-    font-family: var(--baseFont);
-    font-weight: bold;
-    background-color: #A27B5C;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.action button:hover,
-.action a.button:hover {
-    background-color: white;
-    color: #A27B5C;
-    text-decoration: underline;
-}
-
-</style>
 <body>
 <div class="form-container">
-  <h1>Edit Coffee</h1>
+  <h2 th:text="'Edit ' + ${coffee.name}"></h2>
   <form th:action="@{/update}" method="post" th:object="${coffee}">
     <!-- Hidden ID field -->
     <input type="hidden" th:field="*{id}" />
@@ -213,13 +91,15 @@ select.error {
     <div>
       <label>Flavor Notes:</label>
       <div class="flavor-group">
-        <label><span>Chocolate</span><input type="checkbox" th:field="*{flavorNotes}" value="Chocolate" /></label>
-        <label><span>Citrus</span><input type="checkbox" th:field="*{flavorNotes}" value="Citrus" /></label>
-        <label><span>Floral</span><input type="checkbox" th:field="*{flavorNotes}" value="Floral" /></label>
-        <label><span>Nutty</span><input type="checkbox" th:field="*{flavorNotes}" value="Nutty" /></label>
-        <label><span>Spicy</span><input type="checkbox" th:field="*{flavorNotes}" value="Spicy" /></label>
-        <label><span>Fruity</span><input type="checkbox" th:field="*{flavorNotes}" value="Fruity" /></label>
-        <label><span>Earthy</span><input type="checkbox" th:field="*{flavorNotes}" value="Earthy" /></label>
+        <label><span>Chocolate</span><input type="checkbox" th:field="*{flavorNotes}" value="Chocolate"></label>
+        <label><span>Citrus</span><input type="checkbox" th:field="*{flavorNotes}" value="Citrus"></label>
+        <label><span>Earthy</span><input type="checkbox" th:field="*{flavorNotes}" value="Earthy"></label>
+        <label><span>Floral</span><input type="checkbox" th:field="*{flavorNotes}" value="Floral"></label>
+        <label><span>Fruity</span><input type="checkbox" th:field="*{flavorNotes}" value="Fruity"></label>
+        <label><span>Nutty</span><input type="checkbox" th:field="*{flavorNotes}" value="Nutty"></label>
+        <label><span>Strong</span><input type="checkbox" th:field="*{flavorNotes}" value="Strong"></label>
+        <label><span>Spicy</span><input type="checkbox" th:field="*{flavorNotes}" value="Spicy"></label>
+        <label><span>None</span><input type="checkbox" th:field="*{flavorNotes}" value="None"></label>
       </div>
     </div>
 
@@ -234,6 +114,11 @@ select.error {
         <option value="Espresso">Espresso</option>
       </select>
       <p class="error" th:if="${#fields.hasErrors('brewMethod')}" th:errors="*{brewMethod}"></p>
+    </div>
+
+    <div>
+      <label for="profile">Coffee Picture</label>
+      <input type="file" id="profile" name="imageFile" />
     </div>
 
     <!-- Actions -->

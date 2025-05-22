@@ -1,41 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root {
-    --boldColor: #FFF0DC;
-    --coffeeFont: "Special Gothic Expanded One", sans-serif;
-    --baseFont: "Montserrat", sans-serif;
-    --lightFontColor: #543A14;
-    --borderColor: 5px solid #A27B5C;
-    --color-error: #FE4F2D;
-}
-
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-h1 {
-    color: var(--boldColor);
-    font-family: var(--coffeeFont);
-    background-color: #A27B5C;
-    font-size: 32px;
-    letter-spacing: 5px;
-    text-align: center;
-    margin-top: 5px;
-    border-radius: 5px;
+:root {
+    --logoFont: "Special Gothic Expanded One", sans-serif;
+    --baseFont: "Montserrat", sans-serif;
+    --primaryColor: #3F4F44;
+    --secondaryColor:#2C3930;
+    /* Accent Colors */
+    --boldColor: #FFF0DC;
+    --lightFontColor: #543A14;
+    --borderColor:5px solid #A27B5C;
+    --borderColorOnly: #A27B5C;
+    --delete: #E07B39;
+    --edit:#F0BB78;
+    --error: #FE4F2D;
+    --borderRadius: 5px;
 }
 
-.form-container {
+body{
+    background-color: var(--primaryColor);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+.form-container h2 {
+    color: var(--boldColor);
+    font-family: var(--logoFont);
+    background-color: #A27B5C;
+    letter-spacing: 5px;
+    text-align: center;
+    margin: 5px auto;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.form-container {
     background-color: #DCD7C9;
     max-width: 500px;
-    margin: 30px auto;
+    height: auto;
     padding: 25px;
     border-radius: 10px;
     color: var(--lightFontColor);
@@ -43,14 +54,10 @@ h1 {
     border-left: var(--borderColor);
 }
 
-.form-container form > div {
-    margin-bottom: 15px;
-}
-
 .form-container label {
     display: block;
-    margin-bottom: 5px;
     font-weight: bold;
+    font-family: var(--baseFont);
 }
 
 .form-container input[type="text"],
@@ -75,21 +82,25 @@ h1 {
 }
 
 .form-container .flavor-group label {
+margin-top: 5px;
     display: flex;
     align-items: center;
     font-size: 14px;
 }
 
 .form-container .error {
-    color: var(--color-error);
+    color: var(--error);
     font-size: 13px;
     margin-top: 4px;
+    font-family: var(--baseFont);
 }
+
 
 input.error,
 select.error {
-    border: 2px solid var(--color-error);
+    border: 2px solid var(--error);
     background-color: #ffeae6;
+    color: var(--error);
 }
 
 .action {

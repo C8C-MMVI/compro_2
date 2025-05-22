@@ -89,7 +89,8 @@ public class CoffeeService {
                         + c.isDecaf() + ","
                         + c.getStock() + ","
                         + String.join(";", c.getFlavorNotes())+ ","
-                        + c.getBrewMethod()
+                        + c.getBrewMethod() + "," +
+                        (c.getPicture() != null ? c.getPicture() : "")
                 );
                 bw.newLine();
             }
@@ -101,32 +102,49 @@ public class CoffeeService {
     /**
      * This read the CSV file and loads it to the students ArrayList
      */
-    public void readFromDisk(){
+    public void readFromDisk() {
         File file = new File(FILE_NAME);
-        if(!file.exists()){
+        if (!file.exists()) {
             System.out.println("File not found");
             return;
         }
 
-        try(BufferedReader br = new BufferedReader(new FileReader(file))){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            while((line = br.readLine()) != null){
-                String[] data = line.split(",");
-                List<String> flavorNotes = List.of(data[9].split(";"));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",", -1);
+                if (data.length < 12) {
+                    System.out.println("Skipping invalid line: " + line);
+                    continue;
+                }
 
-                Coffee c = new Coffee(
-                        Integer.parseInt(data[0]),
-                        data[1], data[2],
-                        data[3], Double.parseDouble(data[4]),
-                        data[5], data[6],
-                        Boolean.parseBoolean(data[7]),
-                        Integer.parseInt(data[8]),
-                        flavorNotes,
-                        data[10]);
-                coffee.add(c);
+                try {
+                    List<String> flavorNotes = List.of(data[9].split(";"));
+
+                    String picture = data[11].isEmpty() ? null : data[11];
+
+                    Coffee c = new Coffee(
+                            Integer.parseInt(data[0]),
+                            data[1],
+                            data[2],
+                            data[3],
+                            Double.parseDouble(data[4]),
+                            data[5],
+                            data[6],
+                            Boolean.parseBoolean(data[7]),
+                            Integer.parseInt(data[8]),
+                            flavorNotes,
+                            data[10],
+                            picture // Use cleaned value here
+                    );
+                    coffee.add(c);
+                } catch (Exception e) {
+                    System.out.println("Error parsing line: " + line);
+                    e.printStackTrace();
+                }
             }
-        }catch(IOException e){
-            System.out.println("Error: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error reading from file: " + e.getMessage());
         }
     }
 }

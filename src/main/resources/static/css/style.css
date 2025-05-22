@@ -1,15 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
-    --boldColor: #FFF0DC;
-    --coffeeFont: "Special Gothic Expanded One", sans-serif;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --logoFont: "Special Gothic Expanded One", sans-serif;
     --baseFont: "Montserrat", sans-serif;
+    --primaryColor: #3F4F44;
+    --secondaryColor:#2C3930;
+    /* Accent Colors */
+    --boldColor: #FFF0DC;
     --lightFontColor: #543A14;
     --borderColor:5px solid #A27B5C;
     --borderColorOnly: #A27B5C;
     --delete: #E07B39;
     --edit:#F0BB78;
+    --error: #FE4F2D;
+    --borderRadius: 5px;
 }
 
 html, body {
@@ -29,7 +40,7 @@ header{
 
 h1{
     color: var(--boldColor);
-    font-family: var(--coffeeFont);
+    font-family: var(--logoFont);
     font-size: 32px;
     letter-spacing: 5px;
 }
@@ -117,6 +128,11 @@ th, td{
     padding: 5px;
 }
 
+tr td:nth-child(8){
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .actions a:first-child{
     font-weight: bold;
     color: black;
@@ -135,24 +151,11 @@ th, td{
     background-color: var(--edit);
 }
 
-footer{
-    background-color: #2C3930;
-    color: var(--boldColor);
-    font-family: var(--baseFont);
+.actions a:last-child{
     font-weight: bold;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer > h1 {
-    font-family: var(--coffeeFont);
-    font-size: 20px;
-    margin: 0;
-}
-
-footer > p {
-    margin: 0;
-    font-size: 14px;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 3px 7px;
+    background-color: var(--edit);
 }

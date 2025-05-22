@@ -45,7 +45,7 @@
                 <td th:text="${coffee.name}"></td>
                 <td th:text="${coffee.type}"></td>
                 <td th:text="${coffee.size}"></td>
-                <td th:text="${coffee.price}"></td>
+                <td th:text="'&#8369; ' + ${coffee.price}"></td>
                 <td th:text="${coffee.roastLevel}"></td>
                 <td th:text="${coffee.origin}"></td>
                 <!-- Display decaf as true/false -->
@@ -55,6 +55,7 @@
                 <td th:text="${#strings.arrayJoin(coffee.flavorNotes.toArray(), ', ')}"></td>
                 <td th:text="${coffee.brewMethod}"></td>
                 <td class="actions">
+                    <a th:href="@{/coffee/view(id=${coffee.id})}">View</a>
                     <a th:href="@{/delete(id=${coffee.id})}">Delete</a>
                     <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
                 </td>

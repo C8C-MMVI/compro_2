@@ -1,13 +1,20 @@
 package com.coffeemenu.coffeeSpring.controllerCodes;
 
 import com.coffeemenu.coffeeSpring.modelCodes.Coffee;
+import com.coffeemenu.coffeeSpring.modelCodes.UserID;
 import com.coffeemenu.coffeeSpring.serviceCodes.CoffeeService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 public class CoffeeController {
@@ -15,8 +22,19 @@ public class CoffeeController {
     @Autowired
     CoffeeService coffeeService;
 
+    @GetMapping("/catalog")
+    public String catalog(Model model){
+        model.addAttribute("coffees", coffeeService.getCoffee());
+        model.addAttribute("activeMenu", "catalog");
+        return "coffeeCatalog";
+    }
+
     @GetMapping("/")
-    public String index(@RequestParam(defaultValue = "") String search, Model model) {
+    public String index(@RequestParam(defaultValue = "") String search, Model model, HttpSession session) {
+        UserID currentUser = (UserID) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
         model.addAttribute("coffees", coffeeService.searchCoffee(search));
         return "index";
     }
@@ -28,38 +46,111 @@ public class CoffeeController {
     }
 
     @GetMapping("/new")
-    public String createCoffee(Model model) {
-        model.addAttribute("coffee", new Coffee()); // Corrected: add the model attribute
+    public String createCoffee(Model model, HttpSession session) {
+        UserID currentUser = (UserID) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("coffee", new Coffee());
         return "addCoffee";
     }
 
     @PostMapping("/save")
     public String saveCoffee(@ModelAttribute("coffee") @Valid Coffee coffee,
-                             BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "addCoffee"; // Return to form if validation fails
+                             BindingResult bindingResult,
+                             @RequestParam("imageFile") MultipartFile picture,
+                             HttpSession session,
+                             Model model) {
+
+        UserID currentUser = (UserID) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
         }
+
+        if (bindingResult.hasErrors()) {
+            return "addCoffee";
+        }
+
+        if (!picture.isEmpty()) {
+            String path = "data/coffee_pictures/";
+            File uploadFolder = new File(path);
+            if (!uploadFolder.exists()) {
+                uploadFolder.mkdirs();
+            }
+
+            String originalFileName = picture.getOriginalFilename();
+            String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
+            String fileName = UUID.randomUUID() + extension;
+
+            try {
+                File destinationFile = new File(uploadFolder.getAbsolutePath() + File.separator + fileName);
+                picture.transferTo(destinationFile);
+                coffee.setPicture(fileName);
+            } catch (IOException e) {
+                System.out.println("File upload error: " + e.getMessage());
+            }
+        }
+
+        // Let CoffeeService handle ID assignment
         coffeeService.addCoffee(coffee);
         return "redirect:/";
     }
 
     @GetMapping("/edit")
-    public String editCoffee(@RequestParam int id, Model model) {
+    public String editCoffee(@RequestParam int id, Model model, HttpSession session) {
+        UserID currentUser = (UserID) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
         Coffee c = coffeeService.getCoffee(id);
         if (c != null) {
-            model.addAttribute("coffee", c); // Corrected: provide coffee for editing
-            return "editCoffee";
+            model.addAttribute("coffee", c);
+            model.addAttribute("activeMenu", "edit");
+            return "edit";
         }
-        return "redirect:/"; // fallback
+        return "redirect:/";
     }
 
     @PostMapping("/update")
-    public String store(@ModelAttribute("coffee") @Valid Coffee coffee,
-                        BindingResult bindingResult) {
+    public String updateCoffee(@ModelAttribute("coffee") @Valid Coffee coffee,
+                               BindingResult bindingResult,
+                               @RequestParam("imageFile") MultipartFile coffeePicture,
+                               Model model) {
+
         if (bindingResult.hasErrors()) {
-            return "editCoffee";
+            model.addAttribute("coffee", coffee);
+            return "edit";
         }
-        coffeeService.updateCoffee(coffee.getId(), coffee);
+
+        Coffee existingCoffee = coffeeService.getCoffee(coffee.getId());
+        if (existingCoffee != null) {
+
+            if (!coffeePicture.isEmpty()) {
+                String path = "data/coffee_pictures/";
+                File uploadFolder = new File(path);
+                if (!uploadFolder.exists()) {
+                    uploadFolder.mkdirs();
+                }
+
+                String originalFileName = coffeePicture.getOriginalFilename();
+                String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
+                String fileName = UUID.randomUUID() + extension;
+
+                try {
+                    File destinationFile = new File(uploadFolder.getAbsolutePath() + File.separator + fileName);
+                    coffeePicture.transferTo(destinationFile);
+                    coffee.setPicture(fileName);
+                } catch (IOException e) {
+                    System.out.println("File upload error: " + e.getMessage());
+                }
+            } else {
+                coffee.setPicture(existingCoffee.getPicture());
+            }
+
+            coffeeService.updateCoffee(coffee.getId(), coffee);
+        }
+
         return "redirect:/";
     }
 }
