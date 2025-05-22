@@ -39,7 +39,7 @@
 body {
     font-family: var(--baseFont);
     display: grid;
-    grid-template-columns: 310px 1fr;
+    grid-template-columns: 400px 1fr;
     grid-template-areas: "sidebar main";
     height: 100vh;
     width: 100vw;
@@ -60,13 +60,16 @@ aside {
     margin-bottom: 64px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
 }
 
 .text-brand span {
     font-family: var(--logoFont);
-    font-weight: 600;
+    font-weight: bold;
     font-size: 26px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
     color: var(--boldColor);
 }
 

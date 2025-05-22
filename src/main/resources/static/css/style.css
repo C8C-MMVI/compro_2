@@ -17,72 +17,53 @@
     --lightFontColor: #543A14;
     --borderColor:5px solid #A27B5C;
     --borderColorOnly: #A27B5C;
+    --view: #CA7842;
     --delete: #E07B39;
     --edit:#F0BB78;
     --error: #FE4F2D;
     --borderRadius: 5px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --transition: all 0.2s ease-in-out;
+    --border-radius: 5px;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    background: #3F4F44;
-    height: 100%;
+main{
+    margin: auto;
+    height: 100vh;
+}
+
+.options {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: var(--borderColorOnly);
+    padding: 1rem;
+    border-radius: var(--borderRadius);
+    box-shadow: var(--box-shadow);
+    gap: 1rem;
+    width: 50vw;
 }
 
-header{
-    margin: 0;
-    padding: 10px 15px;
-    background-color: #2C3930;
-}
-
-h1{
+.options p{
     color: var(--boldColor);
     font-family: var(--logoFont);
-    font-size: 32px;
+    font-size: 24px;
     letter-spacing: 5px;
-}
-main{
-    flex: 1;
-    margin: 20px auto;
-    width: 100%;
-}
-
-.options{
-    display: flex;
-    background-color: #DCD7C9;
-    justify-content: center;
-    align-items: center;
-    width: 35%;
-    height: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    color: var(--lightFontColor);
-    font-family: var(--baseFont);
-    border-top: var(--borderColor);
-    border-left: var(--borderColor);
 }
 
 .options a{
-    display: flex;
-    align-content: flex-start;
-    border: 2px solid black;
     text-decoration: none;
-    font-family: var(--baseFont);
-    font-weight: bold;
-    background-color: #A27B5C;
+    padding: 0.6rem 1.2rem;
+    background: var(--borderColorOnly);
     color: white;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-right: 15px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    transition: var(--transition);
 }
 
 .options a:hover{
     background-color: white;
-    color: #A27B5C;
+    color: var(--borderColorOnly);
     text-decoration-line: underline;
     font-size: 14px;
 }
@@ -139,7 +120,7 @@ tr td:nth-child(8){
     text-decoration: none;
     border-radius: 5px;
     padding: 3px 7px;
-    background-color: var(--delete);
+    background-color: var(--view);
 }
 
 .actions a:nth-child(2){
@@ -148,7 +129,7 @@ tr td:nth-child(8){
     text-decoration: none;
     border-radius: 5px;
     padding: 3px 7px;
-    background-color: var(--edit);
+    background-color: var(--delete);
 }
 
 .actions a:last-child{
