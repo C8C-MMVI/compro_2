@@ -11,45 +11,42 @@
     --logoFont: "Special Gothic Expanded One", sans-serif;
     --baseFont: "Montserrat", sans-serif;
 
-    /* Primary Theme */
+    /* Main Colors */
     --primaryColor: #3F4F44;
     --secondaryColor: #2C3930;
-    --tertiaryColor: #F5F2EC;
+    --tertiary: #F5F1E9;
 
-    /* Font Colors */
+    /* Accent + Text */
     --boldColor: #FFF0DC;
     --lightFontColor: #543A14;
-    --menuTextColor: #CFC6B8;
+    --menu-text: #C8B99D;
 
-    /* Accent and Feedback */
-    --accentColor: #A27B5C;
-    --hoverColor: #EAE4D5;
-    --error: #FE4F2D;
-    --edit: #F0BB78;
+    /* Utility Colors */
+    --borderColor: 5px solid #A27B5C;
+    --borderColorOnly: #A27B5C;
     --delete: #E07B39;
+    --edit: #F0BB78;
+    --error: #FE4F2D;
+    --hoverColor: #EAE4D5;
+    --accent: #FFF0DC;
+    --primary: #3F4F44;
+    --menu-hover: #4A5A50;
 
-    --border: 5px solid #A27B5C;
     --borderRadius: 5px;
-
-    /* Menu Behavior */
-    --menuActiveBg: #FFF0DC;
-    --menuActiveText: #3F4F44;
-    --menuHoverBg: #EAE4D5;
 }
 
-/* Body Layout */
+/* Layout */
 body {
-    background-color: var(--primaryColor);
+    font-family: var(--baseFont);
     display: grid;
     grid-template-columns: 310px 1fr;
     grid-template-areas: "sidebar main";
     height: 100vh;
     width: 100vw;
-    font-family: var(--baseFont);
     transition: all 0.5s ease;
 }
 
-/* Sidebar Styles */
+/* Sidebar */
 aside {
     grid-area: sidebar;
     background-color: var(--secondaryColor);
@@ -59,7 +56,6 @@ aside {
     justify-content: space-between;
 }
 
-/* Branding */
 .text-brand {
     margin-bottom: 64px;
     display: flex;
@@ -74,63 +70,67 @@ aside {
     color: var(--boldColor);
 }
 
-/* Menu Styles */
+/* Menu */
 .menu > ul {
     list-style-type: none;
 }
 
 .menu > ul li {
+    font-family: var(--baseFont);
+    color: var(--boldColor);
     padding: 11px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: var(--borderRadius);
+    border-radius: 8px;
     transition: background-color 0.2s ease;
     margin-bottom: 7px;
     cursor: pointer;
-    color: var(--boldColor);
+    justify-content: flex-start;
 }
 
-.menu > ul > li svg {
+.menu > ul li svg {
     margin-right: 14px;
     width: 24px;
     height: 24px;
+    fill: none;
+    stroke: var(--boldColor);
+    transition: stroke 0.2s ease;
 }
 
-.menu > ul > li > span:nth-child(2) {
+.menu > ul li span {
     flex-grow: 1;
 }
 
-/* Hover */
-.menu > ul > li:hover {
-    background-color: var(--menuHoverBg);
-    color: var(--primaryColor);
+/* Hover + Active States */
+.menu > ul li:hover {
+    background-color: var(--menu-hover);
+    color: var(--hoverColor);
 }
 
-.menu > ul > li:hover > svg > * {
-    stroke: var(--primaryColor);
+.menu > ul li:hover svg {
+    stroke: var(--hoverColor);
 }
 
-/* Active Menu */
-.menu > ul > li.active {
-    background-color: var(--menuActiveBg);
-    color: var(--menuActiveText);
+.menu > ul li.active {
+    background-color: var(--accent);
+    color: var(--primary);
 }
 
-.menu > ul > li.active > svg > * {
-    stroke: var(--menuActiveText);
+.menu > ul li.active svg {
+    stroke: var(--primary);
 }
-
-.menu > ul > li:hover > svg > * {
-    stroke: #000000; /* Force stroke color to black for better contrast */
-}
-
 
 /* User Profile */
 .user-profile {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.user-profile img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
 }
 
 .user-profile p {
@@ -143,28 +143,21 @@ aside {
 
 .user-profile span {
     font-size: 12px;
-    color: var(--menuTextColor);
-}
-
-.user-profile img {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+    color: var(--menu-text);
 }
 
 /* Main Content */
 main {
     grid-area: main;
-    background-color: var(--tertiaryColor);
+    background-color: var(--primaryColor);
     padding: 71px;
     overflow-y: auto;
 }
 
-
-/* Responsive: Tablet & Below */
+/* Responsive: Tablet & Mobile */
 @media (max-width: 768px) {
     body {
-        grid-template-columns: 100px 1fr;
+        grid-template-columns: 80px 1fr;
     }
 
     aside {
@@ -172,20 +165,18 @@ main {
     }
 
     .text-brand span,
-    .menu > ul > li > span,
+    .menu > ul li span,
     .user-profile > div {
         display: none;
     }
 
-    .menu > ul > li {
+    .menu > ul li {
         justify-content: center;
         padding: 12px 0;
     }
 
-    svg {
+    .menu > ul li svg {
         margin-right: 0;
-        width: 24px;
-        height: 24px;
-        flex-grow: 1;
     }
 }
+
