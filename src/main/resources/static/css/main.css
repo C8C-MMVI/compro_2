@@ -95,8 +95,7 @@ aside {
     margin-right: 14px;
     width: 24px;
     height: 24px;
-    fill: none;
-    stroke: var(--boldColor);
+    fill: var(--secondaryColor);
     transition: stroke 0.2s ease;
 }
 

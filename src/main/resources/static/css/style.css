@@ -26,7 +26,9 @@
     --transition: all 0.2s ease-in-out;
     --border-radius: 5px;
 }
-
+body{
+    background-color: var(--primaryColor);
+}
 main{
     margin: auto;
     height: 100vh;
@@ -91,9 +93,9 @@ main{
 }
 
 .tableCoffee{
-    margin: 15px;
+    margin-top: 1em;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 table{
