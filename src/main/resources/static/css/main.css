@@ -95,7 +95,6 @@ aside {
     margin-right: 14px;
     width: 24px;
     height: 24px;
-    fill: var(--secondaryColor);
     transition: stroke 0.2s ease;
 }
 
@@ -115,11 +114,11 @@ aside {
 
 .menu > ul li.active {
     background-color: var(--accent);
-    color: var(--primary);
+    color: var(--primaryColor);
 }
 
 .menu > ul li.active svg {
-    stroke: var(--primary);
+    stroke: var(--secondaryColor);
 }
 
 /* User Profile */

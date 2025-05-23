@@ -27,7 +27,11 @@ public class CoffeeController {
     }
 
     @GetMapping("/catalog")
-    public String catalog(Model model){
+    public String catalog(Model model, HttpSession session){
+        UserID currentUser = (UserID) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
         model.addAttribute("coffees", coffeeService.getCoffee());
         model.addAttribute("activeMenu", "catalog");
         return "coffeeCatalog";

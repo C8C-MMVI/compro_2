@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --logoFont: "Special Gothic Expanded One", sans-serif;
+    --baseFont: "Montserrat", sans-serif;
+
+    /* Main Colors */
+    --primaryColor: #3F4F44;
+    --secondaryColor: #2C3930;
+    --tertiary: #F5F1E9;
+
+    /* Accent + Text */
+    --boldColor: #FFF0DC;
+    --lightFontColor: #543A14;
+    --menu-text: #C8B99D;
+
+    /* Utility Colors */
+    --borderColor: 5px solid #A27B5C;
+    --borderColorOnly: #A27B5C;
+    --delete: #E07B39;
+    --edit: #F0BB78;
+    --error: #FE4F2D;
+    --hoverColor: #EAE4D5;
+    --accent: #FFF0DC;
+    --primary: #3F4F44;
+    --menu-hover: #4A5A50;
+
+    --borderRadius: 5px;
+}
+
+body {
+    font-family: var(--baseFont);
+    background-color: var(--primaryColor);
+    color: var(--menu-text);
+    margin: 0;
+    padding: 0;
+}
+
+.coffee-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+}
+
+.coffee-card {
+    background-color: var(--secondaryColor);
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+    flex: 1 1 250px;
+    max-width: 200px;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.coffee-card:hover {
+    transform: scale(1.1);
+}
+
+.coffee-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.coffee-card-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.coffee-price {
+    font-size: 1.2rem;
+    color: var(--accent);
+}
+
+.view-details {
+    background-color: var(--edit);
+    color: var(--lightFontColor);
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--borderRadius);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background 0.3s;
+    font-family: var(--baseFont);
+}
+
+.view-details:hover {
+    background-color: var(--hoverColor);
+}
+
+/* Responsive: Full width cards on smaller screens */
+@media (max-width: 768px) {
+    .coffee-card {
+        flex: 1 1 90%;
+        max-width: 90%;
+    }
+}

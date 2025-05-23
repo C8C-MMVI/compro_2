@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --logoFont: "Special Gothic Expanded One", sans-serif;
+    --baseFont: "Montserrat", sans-serif;
+    --primaryColor: #3F4F44;
+    /* Dark green */
+    --secondaryColor: #2C3930;
+    /* Darker green */
+    --boldColor: #FFF0DC;
+    /* Light cream */
+    --lightFontColor: #543A14;
+    /* Brownish */
+    --borderColor: #A27B5C;
+    /* Light brown */
+    --borderRadius: 10px;
+    --buttonBg: #E07B39;
+    /* Orange-ish button */
+    --buttonHoverBg: #A27B5C;
+    /* Darker brown hover */
+    --buttonTextColor: white;
+}
+
+body {
+    background-color: var(--primaryColor);
+    font-family: var(--baseFont);
+    color: var(--lightFontColor);
+}
+
+main {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.coffee-card {
+    background-color: var(--secondaryColor);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--borderRadius);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    max-width: 200px;
+    width: 100%;
+    border-radius: var(--borderRadius);
+    border: 3px solid var(--borderColor);
+    object-fit: cover;
+    margin-bottom: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile h2 {
+    font-family: var(--logoFont);
+    color: var(--boldColor);
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+.profile p {
+    font-size: 1.1rem;
+    color: var(--boldColor);
+    font-weight: 600;
+}
+
+.details {
+    background-color: #DCD7C9;
+    /* Light cream background for details */
+    border-radius: var(--borderRadius);
+    border: 1px solid var(--borderColor);
+    padding: 15px;
+}
+
+.details div {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: var(--lightFontColor);
+}
+
+.details strong {
+    color: var(--boldColor);
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--buttonBg);
+    color: var(--buttonTextColor);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: var(--borderRadius);
+    margin-top: 20px;
+    font-weight: 700;
+    font-family: var(--baseFont);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: var(--buttonHoverBg);
+    color: var(--boldColor);
+    text-decoration: underline;
+}

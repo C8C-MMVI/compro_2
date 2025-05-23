@@ -7,14 +7,14 @@
       )}">
 <head>
     <title th:text="'View Coffee | ' + ${coffee.name}">View Coffee</title>
-    <link th:href="@{/css/styleCoffee.css}" rel="stylesheet">
+    <link th:href="@{/css/card.css}" rel="stylesheet">
 </head>
 <body>
 <main>
     <div class="coffee-card">
         <div class="profile">
-            <img class="profile-img" th:if="${coffee.coffeePicture != null}"
-                 th:src="@{'/' + ${coffee.coffeePicture}}"
+            <img class="profile-img" th:if="${coffee.picture != null}"
+                 th:src="@{'/' + ${coffee.picture}}"
                  alt="Coffee Image">
 
             <h2 th:text="${coffee.name}">Coffee Name</h2>

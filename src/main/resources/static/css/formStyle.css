@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,19 +11,19 @@
     --logoFont: "Special Gothic Expanded One", sans-serif;
     --baseFont: "Montserrat", sans-serif;
     --primaryColor: #3F4F44;
-    --secondaryColor:#2C3930;
+    --secondaryColor: #2C3930;
     /* Accent Colors */
     --boldColor: #FFF0DC;
     --lightFontColor: #543A14;
-    --borderColor:5px solid #A27B5C;
+    --borderColor: 5px solid #A27B5C;
     --borderColorOnly: #A27B5C;
     --delete: #E07B39;
-    --edit:#F0BB78;
+    --edit: #F0BB78;
     --error: #FE4F2D;
     --borderRadius: 5px;
 }
 
-body{
+body {
     background-color: var(--primaryColor);
     display: flex;
     flex-direction: column;
@@ -82,7 +82,7 @@ body{
 }
 
 .form-container .flavor-group label {
-margin-top: 5px;
+    margin-top: 5px;
     display: flex;
     align-items: center;
     font-size: 14px;
